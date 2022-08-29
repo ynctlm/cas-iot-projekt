@@ -22,7 +22,7 @@ Drei Services werden benötigt:
    kubectl apply -f k8s/grafana.yaml
    kubectl apply -f k8s/mariadb.yaml
    ```
-3. Installation von 
+3. Installation von `node-red-node-mysql` in Node-RED über `Palette verwalten`
 
 
 
