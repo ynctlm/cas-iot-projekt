@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nodered-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 50Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/Users/yannictalmonlarmee/Documents/Studium/Master/3. Semester/W3M20020 - Internet of Things/cas-iot-projekt/nodered"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nodered-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodered
+  name: nodered
+spec:
+  selector:
+    matchLabels:
+      app: nodered
+  template:
+    metadata:
+      labels:
+        app: nodered
+    spec:
+      volumes:
+        - name: nodered-pv-storage
+          persistentVolumeClaim:
+            claimName: nodered-pv-claim
+      containers:
+        - name: nodered
+          image: nodered/node-red
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 1880
+              name: http-node-red
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: nodered-pv-storage
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodered
+spec:
+  ports:
+    - port: 1880
+      protocol: TCP
+      targetPort: http-node-red
+  selector:
+    app: nodered
+  sessionAffinity: None
+  type: LoadBalancer

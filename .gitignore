@@ -1,0 +1,10 @@
+# exclude everything
+*
+
+# but include nodered-flows, k8s definitions and doc
+!nodered
+!nodered/flows.json
+!k8s
+!k8s/*
+!.gitignore
+!README.MD
