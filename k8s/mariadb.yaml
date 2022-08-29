@@ -46,7 +46,7 @@ spec:
             claimName: mariadb-pv-claim
       containers:
         - name: mariadb
-          image: mariadb
+          image: mariadb:10.9.2
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: mariadb-pv-storage
@@ -54,6 +54,8 @@ spec:
           env:
             - name: MARIADB_ROOT_PASSWORD
               value: "mysecretpw"
+            - name: MARIADB_DATABASE
+              value: "weather"
           ports:
             - containerPort: 3306
 ---

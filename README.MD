@@ -18,8 +18,11 @@ Drei Services werden benötigt:
    ```
 2. Starten des Kubernetes-Clusters
    ```
-   kubectl apply -f k8s
+   kubectl apply -f k8s/nodered.yaml
+   kubectl apply -f k8s/grafana.yaml
+   kubectl apply -f k8s/mariadb.yaml
    ```
+3. Installation von 
 
 
 

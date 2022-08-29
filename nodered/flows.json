@@ -1,16 +1,56 @@
 [
     {
-        "id": "7cf04e72505b837c",
+        "id": "9f71a4ca83e0be1b",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "FuelPriceAPI",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "1c10111163ed0118",
+        "id": "55bc388994a74c02",
+        "type": "MySQLdatabase",
+        "name": "MariaDB_weather",
+        "host": "mariadb.default.svc.cluster.local",
+        "port": "3306",
+        "db": "weather",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "1fde2a06d68ffe10",
+        "type": "debug",
+        "z": "9f71a4ca83e0be1b",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "2cb819b933614b67",
+        "type": "mysql",
+        "z": "9f71a4ca83e0be1b",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 400,
+        "y": 300,
+        "wires": [
+            [
+                "1fde2a06d68ffe10"
+            ]
+        ]
+    },
+    {
+        "id": "174dd4ef3448faf4",
         "type": "inject",
-        "z": "7cf04e72505b837c",
+        "z": "9f71a4ca83e0be1b",
         "name": "",
         "props": [
             {
@@ -25,13 +65,15 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "topic": "",
+        "topic": "CREATE DATABASE IF EXISTS weather;",
         "payload": "",
         "payloadType": "date",
-        "x": 380,
-        "y": 240,
+        "x": 160,
+        "y": 300,
         "wires": [
-            []
+            [
+                "2cb819b933614b67"
+            ]
         ]
     }
 ]

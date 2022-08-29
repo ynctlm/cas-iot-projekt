@@ -46,7 +46,7 @@ spec:
             claimName: nodered-pv-claim
       containers:
         - name: nodered
-          image: nodered/node-red
+          image: nodered/node-red:3.0.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 1880
