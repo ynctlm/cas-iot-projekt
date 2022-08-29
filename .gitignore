@@ -1,14 +1,12 @@
-# exclude grafana, mariadb, nodered/.npm
-grafana
+# exclude grafana folders
+grafana/csv
+grafana/plugins
+grafana/png
+
+# exclude mariadb
 mariadb
+
+# exclude nodered folders (node_modules is needed to prevent the need to install packages manually) --> better for testing
 nodered/.npm
 nodered/lib
-
-# but include nodered-flows, k8s definitions and doc
-!nodered/flows.json
-!nodered/flows_cred.json
-!nodered/settings.js
-!k8s
-!k8s/*
-!.gitignore
-!README.MD
+nodered/flows.json

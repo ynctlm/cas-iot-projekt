@@ -10,7 +10,7 @@
     {
         "id": "853989b43beb79a4",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "Demo: Insert test-data",
         "disabled": false,
         "info": "",
         "env": []
@@ -26,48 +26,21 @@
         "charset": "UTF8"
     },
     {
-        "id": "1fde2a06d68ffe10",
-        "type": "debug",
-        "z": "9f71a4ca83e0be1b",
-        "name": "output",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 430,
-        "y": 60,
-        "wires": []
-    },
-    {
         "id": "174dd4ef3448faf4",
         "type": "inject",
         "z": "9f71a4ca83e0be1b",
         "name": "on startup",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
+        "props": [],
         "repeat": "",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
-        "topic": "CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(3,1), humidity int);",
-        "payload": "",
-        "payloadType": "date",
-        "x": 150,
-        "y": 60,
+        "topic": "",
+        "x": 130,
+        "y": 140,
         "wires": [
             [
-                "2cb819b933614b67"
+                "72f448f16ad80fdf"
             ]
         ]
     },
@@ -77,39 +50,191 @@
         "z": "9f71a4ca83e0be1b",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 300,
-        "y": 60,
+        "x": 460,
+        "y": 140,
         "wires": [
             [
-                "1fde2a06d68ffe10"
+                "94bfc0a0fe7f9c4b"
             ]
         ]
     },
     {
-        "id": "d77f245adec80f27",
+        "id": "221ba212abb0692a",
+        "type": "comment",
+        "z": "9f71a4ca83e0be1b",
+        "name": "README",
+        "info": "Die Datenbanktabelle muss angelegt werden. \nHierzu muss eine beliebige Node in Node-RED ca. 60 Sekunden nach Start der MariaDB verschoben werden. \nDann kann per Klick auf \"Übernahme (deploy)\" die Datenbank initialisiert werden.",
+        "x": 140,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "4555243f381dd53b",
+        "type": "debug",
+        "z": "9f71a4ca83e0be1b",
+        "name": "errors",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "daa1fd65d36f5990",
+        "type": "mysql",
+        "z": "9f71a4ca83e0be1b",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 460,
+        "y": 200,
+        "wires": [
+            [
+                "4555243f381dd53b"
+            ]
+        ]
+    },
+    {
+        "id": "94bfc0a0fe7f9c4b",
+        "type": "function",
+        "z": "9f71a4ca83e0be1b",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT * FROM data ORDER BY datetime DESC LIMIT 0;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 200,
+        "wires": [
+            [
+                "daa1fd65d36f5990"
+            ]
+        ]
+    },
+    {
+        "id": "72f448f16ad80fdf",
+        "type": "function",
+        "z": "9f71a4ca83e0be1b",
+        "name": "CREATE TABLE",
+        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(3,1), humidity int);`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80dbcfb5f2161f30",
         "type": "inject",
         "z": "853989b43beb79a4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
+        "name": "on startup",
+        "props": [],
         "repeat": "",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 300,
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "0e9153550d1b2be3"
+            ]
+        ]
+    },
+    {
+        "id": "1b1820eba2eadff8",
+        "type": "mysql",
+        "z": "853989b43beb79a4",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "49b93d89ca8d8128"
+            ]
+        ]
+    },
+    {
+        "id": "ec44d8eb7f5a689a",
+        "type": "debug",
+        "z": "853989b43beb79a4",
+        "name": "inserted values",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 560,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8a0677ea96659b9d",
+        "type": "mysql",
+        "z": "853989b43beb79a4",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 400,
         "y": 180,
         "wires": [
-            []
+            [
+                "ec44d8eb7f5a689a"
+            ]
+        ]
+    },
+    {
+        "id": "49b93d89ca8d8128",
+        "type": "function",
+        "z": "853989b43beb79a4",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT * FROM data ORDER BY datetime DESC LIMIT 1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "8a0677ea96659b9d"
+            ]
+        ]
+    },
+    {
+        "id": "0e9153550d1b2be3",
+        "type": "function",
+        "z": "853989b43beb79a4",
+        "name": "INSERT",
+        "func": "var temp = Math.random() * 45 - 10;\nvar humidity = Math.floor(Math.random() * 101);\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "1b1820eba2eadff8"
+            ]
         ]
     }
 ]
