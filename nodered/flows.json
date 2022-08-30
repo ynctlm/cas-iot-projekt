@@ -354,7 +354,7 @@
         "id": "6313927fc02cfb67",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
-        "name": "debug 1",
+        "name": "CurrentBuffer",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -363,7 +363,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 660,
+        "x": 520,
         "y": 60,
         "wires": []
     },
@@ -377,8 +377,8 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 710,
-        "y": 200,
+        "x": 730,
+        "y": 240,
         "wires": []
     },
     {
@@ -388,12 +388,12 @@
         "name": "",
         "message": [
             {
-                "message": "{{payload.sensor}} - {{payload.temperature}} C ° s"
+                "message": "Am Sensor {{payload.sensor}} wurden am {{payload.date}} {{payload.temperature}}°C gemessen,"
             }
         ],
         "language": "none",
-        "x": 530,
-        "y": 200,
+        "x": 570,
+        "y": 240,
         "wires": [
             [
                 "907c3fc70c715815"
@@ -407,11 +407,10 @@
         "bot": "aaaaebd82a7f4306",
         "botProduction": "aaaaebd82a7f4306",
         "x": 130,
-        "y": 180,
+        "y": 160,
         "wires": [
             [
-                "4ffd4d8815f4acb6",
-                "9ff27cb3f6af3d1e"
+                "a4406974266b7e18"
             ]
         ]
     },
@@ -432,7 +431,6 @@
         "y": 60,
         "wires": [
             [
-                "ce088101b63f5987",
                 "96e8f86f9889cad6"
             ]
         ]
@@ -441,15 +439,15 @@
         "id": "9ff27cb3f6af3d1e",
         "type": "function",
         "z": "f6f2187d.f17ca8",
-        "name": "function 1",
-        "func": "msg.payload = flow.get(\"mydata\");\n\n\nnode.warn(msg.payload);\n\n\n//node.warn(flow.get(\"mydata\"));\nreturn msg;",
+        "name": "getBuffer",
+        "func": "msg.payload = flow.get(\"mydata\");\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 280,
+        "y": 240,
         "wires": [
             [
                 "c3167f1ccf1a67c1"
@@ -457,34 +455,18 @@
         ]
     },
     {
-        "id": "ce088101b63f5987",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 420,
-        "y": 120,
-        "wires": []
-    },
-    {
         "id": "96e8f86f9889cad6",
         "type": "function",
         "z": "f6f2187d.f17ca8",
-        "name": "function 2",
-        "func": "flow.set(\"mydata\",\"\");\nflow.set(\"mydata\",msg.payload);\nreturn msg;",
+        "name": "createBuffer",
+        "func": "msg.payload.temperature = msg.payload.temperature.toFixed(1);\n\nvar date = new Date();\nvar day = date.getDay();\nvar month = date.getMonth();\nvar year = date.getFullYear();\nvar hour = date.getHours();\nvar minute = date.getMinutes();\nvar second = date.getSeconds()\n\nmsg.payload.date = `${day}.${month}.${year} ${hour}:${minute}:${second}`\nflow.set(\"mydata\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 40,
+        "x": 350,
+        "y": 60,
         "wires": [
             [
                 "6313927fc02cfb67"
@@ -492,44 +474,104 @@
         ]
     },
     {
-        "id": "4ffd4d8815f4acb6",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 3",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 220,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "865300ebb2bcc2e8",
-        "type": "inject",
+        "id": "a4406974266b7e18",
+        "type": "switch",
         "z": "f6f2187d.f17ca8",
         "name": "",
-        "props": [
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
             {
-                "p": "payload"
+                "t": "eq",
+                "v": "message",
+                "vt": "str"
             },
             {
-                "p": "topic",
+                "t": "eq",
+                "v": "location",
                 "vt": "str"
             }
         ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 200,
-        "y": 280,
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 90,
+        "y": 240,
+        "wires": [
+            [
+                "f1011432c91d11af"
+            ],
+            [
+                "f016964d61ff14f7"
+            ]
+        ]
+    },
+    {
+        "id": "f016964d61ff14f7",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "getWeatherForLocation",
+        "func": "var lat = msg.payload.content.latitude;\nvar lon = msg.payload.content.longitude;\n\nmsg.payload = `lat: ${lat}, lon: ${lon}`\nnode.warn(msg.payload);\n\n\n//node.warn(flow.get(\"mydata\"));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "b916de78dd76d069"
+            ]
+        ]
+    },
+    {
+        "id": "b916de78dd76d069",
+        "type": "chatbot-message",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "message": [
+            {
+                "message": "{{payload}}"
+            }
+        ],
+        "language": "none",
+        "x": 330,
+        "y": 320,
+        "wires": [
+            [
+                "d7be776664af284e"
+            ]
+        ]
+    },
+    {
+        "id": "d7be776664af284e",
+        "type": "chatbot-telegram-send",
+        "z": "f6f2187d.f17ca8",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 490,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f1011432c91d11af",
+        "type": "chatbot-rules",
+        "z": "f6f2187d.f17ca8",
+        "name": "MessageCommand",
+        "rules": [
+            {
+                "type": "command",
+                "command": "/temperature"
+            }
+        ],
+        "outputs": 1,
+        "x": 270,
+        "y": 240,
         "wires": [
             [
                 "9ff27cb3f6af3d1e"
