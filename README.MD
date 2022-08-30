@@ -16,15 +16,21 @@ Drei Services werden benötigt:
    ```
    git clone https://github.com/ynctlm/cas-iot-projekt.git
    ```
-2. Starten des Kubernetes-Clusters
+2. Anpassen der Eigenschaft `spec.hostPath.path` in allen Dateien im Ordner `k8s`. Es muss jeweils der Pfad des heruntergeladenen Git-Repositories angegeben werden.
+3. Starten des Kubernetes-Clusters
    ```
    kubectl apply -f k8s
    ```
-3. Den Start der Container mit folgendem Befehl überwachen
+4. Den Start der Container mit folgendem Befehl überwachen
    ```
    watch kubectl get all
    ```
-4. Wenn die Pods `grafana`, `mariadb` und `nodered` im Status `Running` sind, können (Node-RED)[localhost:1880] und (Grafana)[localhost:3000] im Browser geöffnet werden.
+5. Wenn die Pods `grafana`, `mariadb` und `nodered` im Status `Running` sind, können (Node-RED)[localhost:1880] und (Grafana)[localhost:3000] im Browser geöffnet werden.
+6. Die Grafana-Credentials sind:
+   
+   User: admin
+   
+   Passwort: admin
 
 ## Initialisieren der Datenbank mit Node-RED Flow
 1. Hierzu (Node-RED)[localhost:1880] ca. 60 aufrufen, nachdem die Kubernetes-Services erfolgreich gestartet wurden. 
