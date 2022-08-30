@@ -10,7 +10,7 @@
     {
         "id": "853989b43beb79a4",
         "type": "tab",
-        "label": "Demo: Insert test-data",
+        "label": "Create Demo-Data",
         "disabled": false,
         "info": "",
         "env": []
@@ -25,7 +25,7 @@
     {
         "id": "55cdbbae8fc6c215",
         "type": "tab",
-        "label": "MQTT-Handling",
+        "label": "MQTT-Receiver",
         "disabled": false,
         "info": "",
         "env": []
@@ -39,7 +39,7 @@
         "in": [
             {
                 "x": 60,
-                "y": 120,
+                "y": 220,
                 "wires": [
                     {
                         "id": "9ff27cb3f6af3d1e"
@@ -47,18 +47,7 @@
                 ]
             }
         ],
-        "out": [
-            {
-                "x": 460,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "c3167f1ccf1a67c1",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
+        "out": [],
         "env": [],
         "meta": {},
         "color": "#DDAA99"
@@ -80,46 +69,54 @@
                 ]
             }
         ],
-        "out": [
-            {
-                "x": 500,
-                "y": 180,
-                "wires": [
-                    {
-                        "id": "37bd1fd47766db0e",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
+        "out": [],
         "env": [],
         "meta": {},
         "color": "#DDAA99"
     },
     {
-        "id": "80147cce57e9dcd0",
-        "type": "group",
-        "z": "f6f2187d.f17ca8",
-        "style": {
-            "stroke": "#999999",
-            "stroke-opacity": "1",
-            "fill": "none",
-            "fill-opacity": "1",
-            "label": true,
-            "label-position": "nw",
-            "color": "#a4a4a4"
-        },
-        "nodes": [
-            "6313927fc02cfb67",
-            "97322ec063f560b6",
-            "96e8f86f9889cad6",
-            "f3547f6542d13146",
-            "de5a47c221b90108"
+        "id": "48c7bb8cccf54c05",
+        "type": "subflow",
+        "name": "/openwindow",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "b51f61187c21987d"
+                    }
+                ]
+            }
         ],
-        "x": 14,
-        "y": 19,
-        "w": 592,
-        "h": 162
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "398b474e6e30f016",
+        "type": "subflow",
+        "name": "/closewindow",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "22953d7cd7fbf754"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "55bc388994a74c02",
@@ -184,8 +181,8 @@
         "z": "60a563125e5b0d46",
         "name": "/temperature: Zuletzt empfangene Temperatur des Sensors wird versendet",
         "info": "",
-        "x": 400,
-        "y": 80,
+        "x": 320,
+        "y": 140,
         "wires": []
     },
     {
@@ -193,17 +190,17 @@
         "type": "function",
         "z": "60a563125e5b0d46",
         "name": "getBuffer",
-        "func": "msg.payload = flow.get(\"mydata\");\n\nreturn msg;",
+        "func": "msg.payload = global.get(\"mydata\");\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 200,
-        "y": 120,
+        "y": 220,
         "wires": [
             [
-                "c3167f1ccf1a67c1"
+                "2acfddfb5688339f"
             ]
         ]
     },
@@ -218,11 +215,118 @@
             }
         ],
         "language": "none",
-        "x": 330,
-        "y": 120,
+        "x": 510,
+        "y": 260,
         "wires": [
-            []
+            [
+                "8e43617c3908417e"
+            ]
         ]
+    },
+    {
+        "id": "8e43617c3908417e",
+        "type": "chatbot-telegram-send",
+        "z": "60a563125e5b0d46",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 670,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e9b11d999aad32f0",
+        "type": "function",
+        "z": "60a563125e5b0d46",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT sensor, temp FROM data ORDER BY datetime DESC LIMIT 1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 100,
+        "y": 300,
+        "wires": [
+            [
+                "6dad7074b8ae9137"
+            ]
+        ]
+    },
+    {
+        "id": "6dad7074b8ae9137",
+        "type": "mysql",
+        "z": "60a563125e5b0d46",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 240,
+        "y": 300,
+        "wires": [
+            [
+                "ed5ba8973f759f3d"
+            ]
+        ]
+    },
+    {
+        "id": "2acfddfb5688339f",
+        "type": "switch",
+        "z": "60a563125e5b0d46",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "c3167f1ccf1a67c1"
+            ],
+            [
+                "e9b11d999aad32f0"
+            ]
+        ]
+    },
+    {
+        "id": "ed5ba8973f759f3d",
+        "type": "function",
+        "z": "60a563125e5b0d46",
+        "name": "transform",
+        "func": "msg.payload = { temperature: msg.payload[0].temp, sensor: msg.payload[0].sensor }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 300,
+        "wires": [
+            [
+                "c3167f1ccf1a67c1"
+            ]
+        ]
+    },
+    {
+        "id": "6cb33aae68abbf0b",
+        "type": "comment",
+        "z": "60a563125e5b0d46",
+        "name": "Wenn im Buffer keine Daten stehen, wird auf die Datenbank zurückgegriffen",
+        "info": "",
+        "x": 330,
+        "y": 180,
+        "wires": []
     },
     {
         "id": "53b95bb914686140",
@@ -307,7 +411,9 @@
         "x": 370,
         "y": 180,
         "wires": [
-            []
+            [
+                "0d3688b494059eca"
+            ]
         ]
     },
     {
@@ -326,6 +432,398 @@
         "wires": [
             [
                 "37bd1fd47766db0e"
+            ]
+        ]
+    },
+    {
+        "id": "0d3688b494059eca",
+        "type": "chatbot-telegram-send",
+        "z": "0f8381518f6a674a",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b51f61187c21987d",
+        "type": "function",
+        "z": "48c7bb8cccf54c05",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "3f2ac5be864f9de0"
+            ]
+        ]
+    },
+    {
+        "id": "3f2ac5be864f9de0",
+        "type": "mysql",
+        "z": "48c7bb8cccf54c05",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "10ea3903d939c3f5"
+            ]
+        ]
+    },
+    {
+        "id": "10ea3903d939c3f5",
+        "type": "switch",
+        "z": "48c7bb8cccf54c05",
+        "name": "",
+        "property": "payload[0].status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "c11024a7f95530bb"
+            ],
+            [
+                "767b3f68c1e07443"
+            ]
+        ]
+    },
+    {
+        "id": "c11024a7f95530bb",
+        "type": "function",
+        "z": "48c7bb8cccf54c05",
+        "name": "UPDATE",
+        "func": "msg.topic = \"UPDATE servo SET status = 1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "8847f5f013e67f5f"
+            ]
+        ]
+    },
+    {
+        "id": "4cbedc2f111f21d4",
+        "type": "chatbot-message",
+        "z": "48c7bb8cccf54c05",
+        "name": "Fenster wird geöffnet",
+        "message": [
+            {
+                "message": "Das Fenster wird geöffnet."
+            }
+        ],
+        "language": "none",
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "767b3f68c1e07443",
+        "type": "chatbot-message",
+        "z": "48c7bb8cccf54c05",
+        "name": "Fenster ist bereits geöffnet",
+        "message": [
+            {
+                "message": "Das Fenster ist bereits geöffnet."
+            }
+        ],
+        "language": "none",
+        "x": 320,
+        "y": 240,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "8847f5f013e67f5f",
+        "type": "mysql",
+        "z": "48c7bb8cccf54c05",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "4cbedc2f111f21d4",
+                "b04269a03b71f97e"
+            ]
+        ]
+    },
+    {
+        "id": "907c3fc70c715815",
+        "type": "chatbot-telegram-send",
+        "z": "48c7bb8cccf54c05",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 590,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6110532b3ae7f135",
+        "type": "mqtt out",
+        "z": "48c7bb8cccf54c05",
+        "name": "",
+        "topic": "window/status",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d880f4faf167b53f",
+        "x": 700,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b04269a03b71f97e",
+        "type": "function",
+        "z": "48c7bb8cccf54c05",
+        "name": "1",
+        "func": "msg.payload = { windowlocation: \"livingroom\", value: 1 }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 140,
+        "wires": [
+            [
+                "6110532b3ae7f135"
+            ]
+        ]
+    },
+    {
+        "id": "22953d7cd7fbf754",
+        "type": "function",
+        "z": "398b474e6e30f016",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "0fb4d8048461d5f8"
+            ]
+        ]
+    },
+    {
+        "id": "0fb4d8048461d5f8",
+        "type": "mysql",
+        "z": "398b474e6e30f016",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "21ce4f2ea039eb12"
+            ]
+        ]
+    },
+    {
+        "id": "54eb7ae119f50bd4",
+        "type": "function",
+        "z": "398b474e6e30f016",
+        "name": "UPDATE",
+        "func": "msg.topic = \"UPDATE servo SET status = 0;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "813d8f9b780cdf0c"
+            ]
+        ]
+    },
+    {
+        "id": "7442b15628518dc1",
+        "type": "chatbot-message",
+        "z": "398b474e6e30f016",
+        "name": "Fenster ist bereits geschlossen",
+        "message": [
+            {
+                "message": "Das Fenster ist bereits geschlossen."
+            }
+        ],
+        "language": "none",
+        "x": 330,
+        "y": 240,
+        "wires": [
+            [
+                "e9e409c2e2fe0286"
+            ]
+        ]
+    },
+    {
+        "id": "813d8f9b780cdf0c",
+        "type": "mysql",
+        "z": "398b474e6e30f016",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "4e9b71ff496383dd",
+                "67300daf0db19106"
+            ]
+        ]
+    },
+    {
+        "id": "21ce4f2ea039eb12",
+        "type": "switch",
+        "z": "398b474e6e30f016",
+        "name": "",
+        "property": "payload[0].status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "54eb7ae119f50bd4"
+            ],
+            [
+                "7442b15628518dc1"
+            ]
+        ]
+    },
+    {
+        "id": "4e9b71ff496383dd",
+        "type": "chatbot-message",
+        "z": "398b474e6e30f016",
+        "name": "Fenster wird geschlossen",
+        "message": [
+            {
+                "message": "Das Fenster wird geschlossen."
+            }
+        ],
+        "language": "none",
+        "x": 350,
+        "y": 200,
+        "wires": [
+            [
+                "e9e409c2e2fe0286"
+            ]
+        ]
+    },
+    {
+        "id": "e9e409c2e2fe0286",
+        "type": "chatbot-telegram-send",
+        "z": "398b474e6e30f016",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 590,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6152ef541ea71351",
+        "type": "mqtt out",
+        "z": "398b474e6e30f016",
+        "name": "",
+        "topic": "window/status",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "d880f4faf167b53f",
+        "x": 700,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "67300daf0db19106",
+        "type": "function",
+        "z": "398b474e6e30f016",
+        "name": "0",
+        "func": "msg.payload = { windowlocation: \"livingroom\", value: 0 }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 140,
+        "wires": [
+            [
+                "6152ef541ea71351"
             ]
         ]
     },
@@ -368,8 +866,8 @@
         "z": "9f71a4ca83e0be1b",
         "name": "README",
         "info": "Die Datenbanktabelle muss angelegt werden. \nHierzu muss eine beliebige Node in Node-RED ca. 60 Sekunden nach Start der MariaDB verschoben werden. \nDann kann per Klick auf \"Übernahme (deploy)\" die Datenbank initialisiert werden.",
-        "x": 160,
-        "y": 60,
+        "x": 120,
+        "y": 80,
         "wires": []
     },
     {
@@ -427,7 +925,7 @@
         "type": "function",
         "z": "9f71a4ca83e0be1b",
         "name": "CREATE TABLE",
-        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int);`\n            + `CREATE TABLE IF NOT EXISTS servo (id int, status bool, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
+        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int, sensor varchar(10));`\n    + `ALTER TABLE data ADD sensor varchar(10);`\n    + `CREATE TABLE IF NOT EXISTS servo (id int, status bool, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -529,7 +1027,7 @@
         "type": "function",
         "z": "853989b43beb79a4",
         "name": "INSERT",
-        "func": "var temp = Math.random() * 45 - 10;\nvar humidity = Math.floor(Math.random() * 101);\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
+        "func": "var temp = Math.random() * 45 - 10;\nvar humidity = Math.floor(Math.random() * 101);\nvar sensor = \"LM35\";\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity, sensor) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity}, '${sensor}')`;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -544,90 +1042,16 @@
         ]
     },
     {
-        "id": "6313927fc02cfb67",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "g": "80147cce57e9dcd0",
-        "name": "CurrentBuffer",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 480,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "907c3fc70c715815",
-        "type": "chatbot-telegram-send",
-        "z": "f6f2187d.f17ca8",
-        "bot": "aaaaebd82a7f4306",
-        "botProduction": "",
-        "track": false,
-        "passThrough": false,
-        "errorOutput": false,
-        "outputs": 0,
-        "x": 990,
-        "y": 440,
-        "wires": []
-    },
-    {
         "id": "fee1f8d519c0059b",
         "type": "chatbot-telegram-receive",
         "z": "f6f2187d.f17ca8",
         "bot": "aaaaebd82a7f4306",
         "botProduction": "aaaaebd82a7f4306",
-        "x": 130,
-        "y": 280,
+        "x": 170,
+        "y": 160,
         "wires": [
             [
                 "a4406974266b7e18"
-            ]
-        ]
-    },
-    {
-        "id": "97322ec063f560b6",
-        "type": "mqtt in",
-        "z": "f6f2187d.f17ca8",
-        "g": "80147cce57e9dcd0",
-        "name": "",
-        "topic": "LM35/temperature",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "d880f4faf167b53f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 130,
-        "y": 140,
-        "wires": [
-            [
-                "96e8f86f9889cad6"
-            ]
-        ]
-    },
-    {
-        "id": "96e8f86f9889cad6",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "g": "80147cce57e9dcd0",
-        "name": "createBuffer",
-        "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nflow.set(\"mydata\", msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 140,
-        "wires": [
-            [
-                "6313927fc02cfb67"
             ]
         ]
     },
@@ -653,8 +1077,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 90,
-        "y": 360,
+        "x": 130,
+        "y": 240,
         "wires": [
             [
                 "f1011432c91d11af"
@@ -684,48 +1108,28 @@
             }
         ],
         "outputs": 3,
-        "x": 260,
-        "y": 360,
+        "x": 300,
+        "y": 240,
         "wires": [
             [
-                "b51f61187c21987d"
+                "384edf4b6b4e8a92"
             ],
-            [],
+            [
+                "551547a431b6d41f"
+            ],
             [
                 "f267f9c48fb8d15d"
             ]
         ]
     },
     {
-        "id": "f3547f6542d13146",
-        "type": "comment",
-        "z": "f6f2187d.f17ca8",
-        "g": "80147cce57e9dcd0",
-        "name": "MQTT-Daten in Buffer speichern, um sie in Telegram zu versenden",
-        "info": "",
-        "x": 280,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "de5a47c221b90108",
-        "type": "comment",
-        "z": "f6f2187d.f17ca8",
-        "g": "80147cce57e9dcd0",
-        "name": "Grund: Telegram-Bot soll auch ohne Datenbank funktionieren",
-        "info": "",
-        "x": 260,
-        "y": 100,
-        "wires": []
-    },
-    {
         "id": "baee4e03d00eccda",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
-        "name": "Telegram-Bot akzeptiert: /temperature als Text oder einen gesendeten Standort",
+        "name": "Telegram-Bot akzeptiert: Commands oder Standort",
         "info": "",
-        "x": 320,
-        "y": 240,
+        "x": 270,
+        "y": 120,
         "wires": []
     },
     {
@@ -733,181 +1137,36 @@
         "type": "subflow:60a563125e5b0d46",
         "z": "f6f2187d.f17ca8",
         "name": "... /temperature",
-        "x": 300,
-        "y": 420,
-        "wires": [
-            [
-                "907c3fc70c715815"
-            ]
-        ]
+        "x": 500,
+        "y": 280,
+        "wires": []
     },
     {
         "id": "d9187248cca46bdf",
         "type": "subflow:0f8381518f6a674a",
         "z": "f6f2187d.f17ca8",
         "name": "Wetter für Standort senden",
-        "x": 340,
-        "y": 460,
-        "wires": [
-            [
-                "907c3fc70c715815"
-            ]
-        ]
-    },
-    {
-        "id": "3f2ac5be864f9de0",
-        "type": "mysql",
-        "z": "f6f2187d.f17ca8",
-        "mydb": "55bc388994a74c02",
-        "name": "MariaDB",
-        "x": 560,
-        "y": 320,
-        "wires": [
-            [
-                "10ea3903d939c3f5",
-                "33e3741c6cfcda80"
-            ]
-        ]
-    },
-    {
-        "id": "b51f61187c21987d",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "name": "SELECT",
-        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 320,
-        "wires": [
-            [
-                "3f2ac5be864f9de0"
-            ]
-        ]
-    },
-    {
-        "id": "10ea3903d939c3f5",
-        "type": "switch",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "property": "payload[0].status",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "0",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "1",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 690,
-        "y": 320,
-        "wires": [
-            [
-                "c11024a7f95530bb"
-            ],
-            [
-                "767b3f68c1e07443"
-            ]
-        ]
-    },
-    {
-        "id": "33e3741c6cfcda80",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 820,
-        "y": 180,
+        "x": 380,
+        "y": 340,
         "wires": []
     },
     {
-        "id": "4cbedc2f111f21d4",
-        "type": "chatbot-message",
+        "id": "384edf4b6b4e8a92",
+        "type": "subflow:48c7bb8cccf54c05",
         "z": "f6f2187d.f17ca8",
-        "name": "Fenster wird geöffnet",
-        "message": [
-            {
-                "message": "Das Fenster wird geöffnet."
-            }
-        ],
-        "language": "none",
-        "x": 880,
-        "y": 300,
-        "wires": [
-            [
-                "907c3fc70c715815"
-            ]
-        ]
+        "name": "... /openwindow",
+        "x": 500,
+        "y": 200,
+        "wires": []
     },
     {
-        "id": "767b3f68c1e07443",
-        "type": "chatbot-message",
+        "id": "551547a431b6d41f",
+        "type": "subflow:398b474e6e30f016",
         "z": "f6f2187d.f17ca8",
-        "name": "Fenster ist bereits geöffnet",
-        "message": [
-            {
-                "message": "Das Fenster ist bereits geöffnet."
-            }
-        ],
-        "language": "none",
-        "x": 900,
-        "y": 340,
-        "wires": [
-            [
-                "907c3fc70c715815"
-            ]
-        ]
-    },
-    {
-        "id": "c11024a7f95530bb",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "name": "UPDATE",
-        "func": "msg.topic = \"UPDATE servo SET status = 1;\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 840,
-        "y": 260,
-        "wires": [
-            [
-                "8847f5f013e67f5f"
-            ]
-        ]
-    },
-    {
-        "id": "8847f5f013e67f5f",
-        "type": "mysql",
-        "z": "f6f2187d.f17ca8",
-        "mydb": "55bc388994a74c02",
-        "name": "MariaDB",
-        "x": 980,
-        "y": 260,
-        "wires": [
-            [
-                "4cbedc2f111f21d4"
-            ]
-        ]
+        "name": "... /closewindow",
+        "x": 500,
+        "y": 240,
+        "wires": []
     },
     {
         "id": "07ceb05b0b1195ea",
@@ -922,31 +1181,15 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 130,
+        "x": 110,
         "y": 200,
         "wires": [
             [
-                "691837b0c886006e",
-                "6239720a629f32fb"
+                "6239720a629f32fb",
+                "0f526c1bc63486a4",
+                "a8435f6b1d80ef20"
             ]
         ]
-    },
-    {
-        "id": "691837b0c886006e",
-        "type": "debug",
-        "z": "55cdbbae8fc6c215",
-        "name": "MQTT payload",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 320,
-        "y": 120,
-        "wires": []
     },
     {
         "id": "45c7522ecbb427e6",
@@ -954,7 +1197,7 @@
         "z": "55cdbbae8fc6c215",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 440,
+        "x": 460,
         "y": 200,
         "wires": [
             [
@@ -975,7 +1218,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 600,
+        "x": 620,
         "y": 260,
         "wires": []
     },
@@ -985,7 +1228,7 @@
         "z": "55cdbbae8fc6c215",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 440,
+        "x": 460,
         "y": 260,
         "wires": [
             [
@@ -1017,7 +1260,7 @@
         "type": "function",
         "z": "55cdbbae8fc6c215",
         "name": "INSERT",
-        "func": "var temp = msg.payload.temperature;\n\n// da es keinen Feuchtigkeitssensor gibt, Werte simulieren\nvar humidity = Math.floor(Math.abs(msg.payload.temperature)) + 25;\n\nif (humidity > 100) {\n    humidity = humidity - 25;\n}\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
+        "func": "var temp = msg.payload.temperature;\nvar sensor = msg.payload.sensor;\n// da es keinen Feuchtigkeitssensor gibt, Werte simulieren\nvar humidity = Math.floor(Math.abs(msg.payload.temperature)) + 25;\n\nif (humidity > 100) {\n    humidity = humidity - 25;\n}\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity, sensor) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity}, '${sensor}')`;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1030,5 +1273,61 @@
                 "45c7522ecbb427e6"
             ]
         ]
+    },
+    {
+        "id": "a8435f6b1d80ef20",
+        "type": "debug",
+        "z": "55cdbbae8fc6c215",
+        "name": "CurrentBuffer",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "0f526c1bc63486a4",
+        "type": "function",
+        "z": "55cdbbae8fc6c215",
+        "name": "createBuffer",
+        "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nglobal.set(\"mydata\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "a8435f6b1d80ef20"
+            ]
+        ]
+    },
+    {
+        "id": "310ad669aa82a90b",
+        "type": "comment",
+        "z": "55cdbbae8fc6c215",
+        "name": "MQTT-Daten in Datenbank und in Buffer speichern, um sie in Telegram zu versenden",
+        "info": "",
+        "x": 350,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9571239a9a68d0bf",
+        "type": "comment",
+        "z": "55cdbbae8fc6c215",
+        "name": "Grund: Telegram-Bot soll auch ohne Datenbank funktionieren",
+        "info": "",
+        "x": 280,
+        "y": 100,
+        "wires": []
     }
 ]
