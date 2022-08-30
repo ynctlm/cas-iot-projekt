@@ -388,7 +388,7 @@
         "name": "",
         "message": [
             {
-                "message": "Am Sensor {{payload.sensor}} wurden am {{payload.date}} {{payload.temperature}}°C gemessen,"
+                "message": "Am Sensor {{payload.sensor}} wurden zuletzt  {{payload.temperature}}°C gemessen,"
             }
         ],
         "language": "none",
@@ -459,7 +459,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "createBuffer",
-        "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nvar date = new Date();\nvar day = date.getDay();\nvar month = date.getMonth();\nvar year = date.getFullYear();\nvar hour = date.getHours();\nvar minute = date.getMinutes();\nvar second = date.getSeconds()\n\nmsg.payload.date = `${day}.${month}.${year} ${hour}:${minute}:${second}`\nflow.set(\"mydata\", msg.payload);\nreturn msg;",
+        "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nflow.set(\"mydata\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",

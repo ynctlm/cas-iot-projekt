@@ -388,7 +388,7 @@
         "name": "",
         "message": [
             {
-                "message": "Am Sensor {{payload.sensor}} wurden zuletzt  {{payload.temperature}}°C gemessen,"
+                "message": "Am Sensor {{payload.sensor}} wurden zuletzt {{payload.temperature}}°C gemessen."
             }
         ],
         "language": "none",
@@ -536,8 +536,8 @@
             }
         ],
         "language": "none",
-        "x": 430,
-        "y": 320,
+        "x": 290,
+        "y": 380,
         "wires": [
             [
                 "d7be776664af284e"
@@ -554,8 +554,8 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 590,
-        "y": 320,
+        "x": 490,
+        "y": 380,
         "wires": []
     },
     {
@@ -594,8 +594,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 170,
-        "y": 380,
+        "x": 310,
+        "y": 320,
         "wires": [
             [
                 "80ac39183594529a"
@@ -610,8 +610,8 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 330,
-        "y": 380,
+        "x": 450,
+        "y": 320,
         "wires": [
             [
                 "422a56e4934c1a57"
@@ -629,8 +629,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 460,
+        "x": 110,
+        "y": 380,
         "wires": [
             [
                 "b916de78dd76d069"
