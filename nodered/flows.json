@@ -47,18 +47,7 @@
                 ]
             }
         ],
-        "out": [
-            {
-                "x": 460,
-                "y": 120,
-                "wires": [
-                    {
-                        "id": "c3167f1ccf1a67c1",
-                        "port": 0
-                    }
-                ]
-            }
-        ],
+        "out": [],
         "env": [],
         "meta": {},
         "color": "#DDAA99"
@@ -80,18 +69,51 @@
                 ]
             }
         ],
-        "out": [
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "48c7bb8cccf54c05",
+        "type": "subflow",
+        "name": "/openwindow",
+        "info": "",
+        "category": "",
+        "in": [
             {
-                "x": 500,
-                "y": 180,
+                "x": 60,
+                "y": 60,
                 "wires": [
                     {
-                        "id": "37bd1fd47766db0e",
-                        "port": 0
+                        "id": "b51f61187c21987d"
                     }
                 ]
             }
         ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "398b474e6e30f016",
+        "type": "subflow",
+        "name": "/closewindow",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "22953d7cd7fbf754"
+                    }
+                ]
+            }
+        ],
+        "out": [],
         "env": [],
         "meta": {},
         "color": "#DDAA99"
@@ -221,8 +243,24 @@
         "x": 330,
         "y": 120,
         "wires": [
-            []
+            [
+                "8e43617c3908417e"
+            ]
         ]
+    },
+    {
+        "id": "8e43617c3908417e",
+        "type": "chatbot-telegram-send",
+        "z": "60a563125e5b0d46",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 490,
+        "y": 120,
+        "wires": []
     },
     {
         "id": "53b95bb914686140",
@@ -307,7 +345,9 @@
         "x": 370,
         "y": 180,
         "wires": [
-            []
+            [
+                "0d3688b494059eca"
+            ]
         ]
     },
     {
@@ -328,6 +368,322 @@
                 "37bd1fd47766db0e"
             ]
         ]
+    },
+    {
+        "id": "0d3688b494059eca",
+        "type": "chatbot-telegram-send",
+        "z": "0f8381518f6a674a",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b51f61187c21987d",
+        "type": "function",
+        "z": "48c7bb8cccf54c05",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "3f2ac5be864f9de0"
+            ]
+        ]
+    },
+    {
+        "id": "3f2ac5be864f9de0",
+        "type": "mysql",
+        "z": "48c7bb8cccf54c05",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "10ea3903d939c3f5"
+            ]
+        ]
+    },
+    {
+        "id": "10ea3903d939c3f5",
+        "type": "switch",
+        "z": "48c7bb8cccf54c05",
+        "name": "",
+        "property": "payload[0].status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "c11024a7f95530bb"
+            ],
+            [
+                "767b3f68c1e07443"
+            ]
+        ]
+    },
+    {
+        "id": "c11024a7f95530bb",
+        "type": "function",
+        "z": "48c7bb8cccf54c05",
+        "name": "UPDATE",
+        "func": "msg.topic = \"UPDATE servo SET status = 1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "8847f5f013e67f5f"
+            ]
+        ]
+    },
+    {
+        "id": "4cbedc2f111f21d4",
+        "type": "chatbot-message",
+        "z": "48c7bb8cccf54c05",
+        "name": "Fenster wird geöffnet",
+        "message": [
+            {
+                "message": "Das Fenster wird geöffnet."
+            }
+        ],
+        "language": "none",
+        "x": 580,
+        "y": 140,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "767b3f68c1e07443",
+        "type": "chatbot-message",
+        "z": "48c7bb8cccf54c05",
+        "name": "Fenster ist bereits geöffnet",
+        "message": [
+            {
+                "message": "Das Fenster ist bereits geöffnet."
+            }
+        ],
+        "language": "none",
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "8847f5f013e67f5f",
+        "type": "mysql",
+        "z": "48c7bb8cccf54c05",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "4cbedc2f111f21d4"
+            ]
+        ]
+    },
+    {
+        "id": "907c3fc70c715815",
+        "type": "chatbot-telegram-send",
+        "z": "48c7bb8cccf54c05",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 590,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "22953d7cd7fbf754",
+        "type": "function",
+        "z": "398b474e6e30f016",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "0fb4d8048461d5f8"
+            ]
+        ]
+    },
+    {
+        "id": "0fb4d8048461d5f8",
+        "type": "mysql",
+        "z": "398b474e6e30f016",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 320,
+        "y": 60,
+        "wires": [
+            [
+                "21ce4f2ea039eb12"
+            ]
+        ]
+    },
+    {
+        "id": "54eb7ae119f50bd4",
+        "type": "function",
+        "z": "398b474e6e30f016",
+        "name": "UPDATE",
+        "func": "msg.topic = \"UPDATE servo SET status = 0;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "813d8f9b780cdf0c"
+            ]
+        ]
+    },
+    {
+        "id": "7442b15628518dc1",
+        "type": "chatbot-message",
+        "z": "398b474e6e30f016",
+        "name": "Fenster ist bereits geschlossen",
+        "message": [
+            {
+                "message": "Das Fenster ist bereits geschlossen."
+            }
+        ],
+        "language": "none",
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "e9e409c2e2fe0286"
+            ]
+        ]
+    },
+    {
+        "id": "813d8f9b780cdf0c",
+        "type": "mysql",
+        "z": "398b474e6e30f016",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "4e9b71ff496383dd"
+            ]
+        ]
+    },
+    {
+        "id": "21ce4f2ea039eb12",
+        "type": "switch",
+        "z": "398b474e6e30f016",
+        "name": "",
+        "property": "payload[0].status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "54eb7ae119f50bd4"
+            ],
+            [
+                "7442b15628518dc1"
+            ]
+        ]
+    },
+    {
+        "id": "4e9b71ff496383dd",
+        "type": "chatbot-message",
+        "z": "398b474e6e30f016",
+        "name": "Fenster wird geschlossen",
+        "message": [
+            {
+                "message": "Das Fenster wird geschlossen."
+            }
+        ],
+        "language": "none",
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "e9e409c2e2fe0286"
+            ]
+        ]
+    },
+    {
+        "id": "e9e409c2e2fe0286",
+        "type": "chatbot-telegram-send",
+        "z": "398b474e6e30f016",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 590,
+        "y": 180,
+        "wires": []
     },
     {
         "id": "174dd4ef3448faf4",
@@ -427,7 +783,7 @@
         "type": "function",
         "z": "9f71a4ca83e0be1b",
         "name": "CREATE TABLE",
-        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int);`\n            + `CREATE TABLE IF NOT EXISTS servo (id int, status bit, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
+        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int);`\n            + `CREATE TABLE IF NOT EXISTS servo (id int, status bool, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -562,20 +918,6 @@
         "wires": []
     },
     {
-        "id": "907c3fc70c715815",
-        "type": "chatbot-telegram-send",
-        "z": "f6f2187d.f17ca8",
-        "bot": "aaaaebd82a7f4306",
-        "botProduction": "",
-        "track": false,
-        "passThrough": false,
-        "errorOutput": false,
-        "outputs": 0,
-        "x": 570,
-        "y": 440,
-        "wires": []
-    },
-    {
         "id": "fee1f8d519c0059b",
         "type": "chatbot-telegram-receive",
         "z": "f6f2187d.f17ca8",
@@ -687,8 +1029,12 @@
         "x": 260,
         "y": 360,
         "wires": [
-            [],
-            [],
+            [
+                "384edf4b6b4e8a92"
+            ],
+            [
+                "551547a431b6d41f"
+            ],
             [
                 "f267f9c48fb8d15d"
             ]
@@ -731,13 +1077,9 @@
         "type": "subflow:60a563125e5b0d46",
         "z": "f6f2187d.f17ca8",
         "name": "... /temperature",
-        "x": 300,
-        "y": 420,
-        "wires": [
-            [
-                "907c3fc70c715815"
-            ]
-        ]
+        "x": 460,
+        "y": 400,
+        "wires": []
     },
     {
         "id": "d9187248cca46bdf",
@@ -746,59 +1088,24 @@
         "name": "Wetter für Standort senden",
         "x": 340,
         "y": 460,
-        "wires": [
-            [
-                "907c3fc70c715815"
-            ]
-        ]
+        "wires": []
     },
     {
-        "id": "3f2ac5be864f9de0",
-        "type": "mysql",
+        "id": "384edf4b6b4e8a92",
+        "type": "subflow:48c7bb8cccf54c05",
         "z": "f6f2187d.f17ca8",
-        "mydb": "55bc388994a74c02",
-        "name": "MariaDB",
-        "x": 560,
+        "name": "... /openwindow",
+        "x": 460,
         "y": 320,
-        "wires": [
-            [
-                "e61109983e520209"
-            ]
-        ]
+        "wires": []
     },
     {
-        "id": "b51f61187c21987d",
-        "type": "function",
+        "id": "551547a431b6d41f",
+        "type": "subflow:398b474e6e30f016",
         "z": "f6f2187d.f17ca8",
-        "name": "SELECT",
-        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 320,
-        "wires": [
-            [
-                "3f2ac5be864f9de0"
-            ]
-        ]
-    },
-    {
-        "id": "e61109983e520209",
-        "type": "debug",
-        "z": "f6f2187d.f17ca8",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 700,
-        "y": 320,
+        "name": "... /closewindow",
+        "x": 460,
+        "y": 360,
         "wires": []
     },
     {

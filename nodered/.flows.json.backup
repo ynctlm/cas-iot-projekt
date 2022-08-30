@@ -427,7 +427,7 @@
         "type": "function",
         "z": "9f71a4ca83e0be1b",
         "name": "CREATE TABLE",
-        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int);`\n            + `CREATE TABLE IF NOT EXISTS servo (id int, status bit, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
+        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int);`\n            + `CREATE TABLE IF NOT EXISTS servo (id int, status bool, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -571,7 +571,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 570,
+        "x": 990,
         "y": 440,
         "wires": []
     },
@@ -687,7 +687,9 @@
         "x": 260,
         "y": 360,
         "wires": [
-            [],
+            [
+                "b51f61187c21987d"
+            ],
             [],
             [
                 "f267f9c48fb8d15d"
@@ -762,7 +764,8 @@
         "y": 320,
         "wires": [
             [
-                "e61109983e520209"
+                "10ea3903d939c3f5",
+                "33e3741c6cfcda80"
             ]
         ]
     },
@@ -786,7 +789,40 @@
         ]
     },
     {
-        "id": "e61109983e520209",
+        "id": "10ea3903d939c3f5",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload[0].status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "c11024a7f95530bb"
+            ],
+            [
+                "767b3f68c1e07443"
+            ]
+        ]
+    },
+    {
+        "id": "33e3741c6cfcda80",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
         "name": "debug 1",
@@ -794,12 +830,84 @@
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 700,
-        "y": 280,
+        "x": 820,
+        "y": 180,
         "wires": []
+    },
+    {
+        "id": "4cbedc2f111f21d4",
+        "type": "chatbot-message",
+        "z": "f6f2187d.f17ca8",
+        "name": "Fenster wird geöffnet",
+        "message": [
+            {
+                "message": "Das Fenster wird geöffnet."
+            }
+        ],
+        "language": "none",
+        "x": 880,
+        "y": 300,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "767b3f68c1e07443",
+        "type": "chatbot-message",
+        "z": "f6f2187d.f17ca8",
+        "name": "Fenster ist bereits geöffnet",
+        "message": [
+            {
+                "message": "Das Fenster ist bereits geöffnet."
+            }
+        ],
+        "language": "none",
+        "x": 900,
+        "y": 340,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "c11024a7f95530bb",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "UPDATE",
+        "func": "msg.topic = \"UPDATE servo SET status = 1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 260,
+        "wires": [
+            [
+                "8847f5f013e67f5f"
+            ]
+        ]
+    },
+    {
+        "id": "8847f5f013e67f5f",
+        "type": "mysql",
+        "z": "f6f2187d.f17ca8",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 980,
+        "y": 260,
+        "wires": [
+            [
+                "4cbedc2f111f21d4"
+            ]
+        ]
     },
     {
         "id": "07ceb05b0b1195ea",
