@@ -2,7 +2,7 @@
     {
         "id": "9f71a4ca83e0be1b",
         "type": "tab",
-        "label": "Create DB Table",
+        "label": "INIT",
         "disabled": false,
         "info": "",
         "env": []
@@ -10,7 +10,15 @@
     {
         "id": "853989b43beb79a4",
         "type": "tab",
-        "label": "Create Demo-Data",
+        "label": "Demo-Daten",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "55cdbbae8fc6c215",
+        "type": "tab",
+        "label": "MQTT-Receiver",
         "disabled": false,
         "info": "",
         "env": []
@@ -21,14 +29,6 @@
         "label": "Telegram-Bot",
         "disabled": false,
         "info": ""
-    },
-    {
-        "id": "55cdbbae8fc6c215",
-        "type": "tab",
-        "label": "MQTT-Receiver",
-        "disabled": false,
-        "info": "",
-        "env": []
     },
     {
         "id": "60a563125e5b0d46",
@@ -831,14 +831,14 @@
         "id": "174dd4ef3448faf4",
         "type": "inject",
         "z": "9f71a4ca83e0be1b",
-        "name": "on startup",
+        "name": "INIT",
         "props": [],
         "repeat": "",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 130,
+        "x": 110,
         "y": 140,
         "wires": [
             [
@@ -852,7 +852,7 @@
         "z": "9f71a4ca83e0be1b",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 460,
+        "x": 420,
         "y": 140,
         "wires": [
             [
@@ -883,7 +883,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 590,
+        "x": 550,
         "y": 200,
         "wires": []
     },
@@ -893,7 +893,7 @@
         "z": "9f71a4ca83e0be1b",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 460,
+        "x": 420,
         "y": 200,
         "wires": [
             [
@@ -912,7 +912,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 280,
+        "x": 240,
         "y": 200,
         "wires": [
             [
@@ -925,13 +925,13 @@
         "type": "function",
         "z": "9f71a4ca83e0be1b",
         "name": "CREATE TABLE",
-        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int, sensor varchar(10));`\n    + `ALTER TABLE data ADD sensor varchar(10);`\n    + `CREATE TABLE IF NOT EXISTS servo (id int, status bool, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
+        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int, sensor varchar(10));`\n            + `CREATE TABLE IF NOT EXISTS servo (id int, status bool, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 300,
+        "x": 260,
         "y": 140,
         "wires": [
             [
@@ -1040,6 +1040,167 @@
                 "1b1820eba2eadff8"
             ]
         ]
+    },
+    {
+        "id": "07ceb05b0b1195ea",
+        "type": "mqtt in",
+        "z": "55cdbbae8fc6c215",
+        "name": "",
+        "topic": "LM35/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "d880f4faf167b53f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "6239720a629f32fb",
+                "0f526c1bc63486a4"
+            ]
+        ]
+    },
+    {
+        "id": "45c7522ecbb427e6",
+        "type": "mysql",
+        "z": "55cdbbae8fc6c215",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "8e411fc65978e445"
+            ]
+        ]
+    },
+    {
+        "id": "2e338baa79d4d15b",
+        "type": "debug",
+        "z": "55cdbbae8fc6c215",
+        "name": "inserted values",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b0638143c9a50bbd",
+        "type": "mysql",
+        "z": "55cdbbae8fc6c215",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 480,
+        "y": 260,
+        "wires": [
+            [
+                "2e338baa79d4d15b"
+            ]
+        ]
+    },
+    {
+        "id": "8e411fc65978e445",
+        "type": "function",
+        "z": "55cdbbae8fc6c215",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT * FROM data ORDER BY datetime DESC LIMIT 1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 260,
+        "wires": [
+            [
+                "b0638143c9a50bbd"
+            ]
+        ]
+    },
+    {
+        "id": "6239720a629f32fb",
+        "type": "function",
+        "z": "55cdbbae8fc6c215",
+        "name": "INSERT",
+        "func": "var temp = msg.payload.temperature;\nvar sensor = msg.payload.sensor;\n// da es keinen Feuchtigkeitssensor gibt, Werte simulieren\nvar humidity = Math.floor(Math.abs(msg.payload.temperature)) + 25;\n\nif (humidity > 100) {\n    humidity = humidity - 25;\n}\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity, sensor) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity}, '${sensor}')`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "45c7522ecbb427e6"
+            ]
+        ]
+    },
+    {
+        "id": "a8435f6b1d80ef20",
+        "type": "debug",
+        "z": "55cdbbae8fc6c215",
+        "name": "CurrentBuffer",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "0f526c1bc63486a4",
+        "type": "function",
+        "z": "55cdbbae8fc6c215",
+        "name": "createBuffer",
+        "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nglobal.set(\"mydata\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "a8435f6b1d80ef20"
+            ]
+        ]
+    },
+    {
+        "id": "310ad669aa82a90b",
+        "type": "comment",
+        "z": "55cdbbae8fc6c215",
+        "name": "MQTT-Daten in Datenbank und in Buffer speichern, um sie in Telegram zu versenden",
+        "info": "",
+        "x": 370,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9571239a9a68d0bf",
+        "type": "comment",
+        "z": "55cdbbae8fc6c215",
+        "name": "Grund: Telegram-Bot soll auch ohne Datenbank funktionieren",
+        "info": "",
+        "x": 300,
+        "y": 100,
+        "wires": []
     },
     {
         "id": "fee1f8d519c0059b",
@@ -1166,167 +1327,6 @@
         "name": "... /closewindow",
         "x": 500,
         "y": 240,
-        "wires": []
-    },
-    {
-        "id": "07ceb05b0b1195ea",
-        "type": "mqtt in",
-        "z": "55cdbbae8fc6c215",
-        "name": "",
-        "topic": "LM35/temperature",
-        "qos": "0",
-        "datatype": "auto-detect",
-        "broker": "d880f4faf167b53f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 110,
-        "y": 200,
-        "wires": [
-            [
-                "6239720a629f32fb",
-                "0f526c1bc63486a4"
-            ]
-        ]
-    },
-    {
-        "id": "45c7522ecbb427e6",
-        "type": "mysql",
-        "z": "55cdbbae8fc6c215",
-        "mydb": "55bc388994a74c02",
-        "name": "MariaDB",
-        "x": 460,
-        "y": 200,
-        "wires": [
-            [
-                "8e411fc65978e445"
-            ]
-        ]
-    },
-    {
-        "id": "2e338baa79d4d15b",
-        "type": "debug",
-        "z": "55cdbbae8fc6c215",
-        "name": "inserted values",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 620,
-        "y": 260,
-        "wires": []
-    },
-    {
-        "id": "b0638143c9a50bbd",
-        "type": "mysql",
-        "z": "55cdbbae8fc6c215",
-        "mydb": "55bc388994a74c02",
-        "name": "MariaDB",
-        "x": 460,
-        "y": 260,
-        "wires": [
-            [
-                "2e338baa79d4d15b"
-            ]
-        ]
-    },
-    {
-        "id": "8e411fc65978e445",
-        "type": "function",
-        "z": "55cdbbae8fc6c215",
-        "name": "SELECT",
-        "func": "msg.topic = \"SELECT * FROM data ORDER BY datetime DESC LIMIT 1;\"\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 260,
-        "wires": [
-            [
-                "b0638143c9a50bbd"
-            ]
-        ]
-    },
-    {
-        "id": "6239720a629f32fb",
-        "type": "function",
-        "z": "55cdbbae8fc6c215",
-        "name": "INSERT",
-        "func": "var temp = msg.payload.temperature;\nvar sensor = msg.payload.sensor;\n// da es keinen Feuchtigkeitssensor gibt, Werte simulieren\nvar humidity = Math.floor(Math.abs(msg.payload.temperature)) + 25;\n\nif (humidity > 100) {\n    humidity = humidity - 25;\n}\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity, sensor) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity}, '${sensor}')`;\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 300,
-        "y": 200,
-        "wires": [
-            [
-                "45c7522ecbb427e6"
-            ]
-        ]
-    },
-    {
-        "id": "a8435f6b1d80ef20",
-        "type": "debug",
-        "z": "55cdbbae8fc6c215",
-        "name": "CurrentBuffer",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 480,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "0f526c1bc63486a4",
-        "type": "function",
-        "z": "55cdbbae8fc6c215",
-        "name": "createBuffer",
-        "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nglobal.set(\"mydata\", msg.payload);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 140,
-        "wires": [
-            [
-                "a8435f6b1d80ef20"
-            ]
-        ]
-    },
-    {
-        "id": "310ad669aa82a90b",
-        "type": "comment",
-        "z": "55cdbbae8fc6c215",
-        "name": "MQTT-Daten in Datenbank und in Buffer speichern, um sie in Telegram zu versenden",
-        "info": "",
-        "x": 350,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "9571239a9a68d0bf",
-        "type": "comment",
-        "z": "55cdbbae8fc6c215",
-        "name": "Grund: Telegram-Bot soll auch ohne Datenbank funktionieren",
-        "info": "",
-        "x": 280,
-        "y": 100,
         "wires": []
     }
 ]

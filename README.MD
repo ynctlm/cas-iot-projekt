@@ -46,17 +46,14 @@ kubectl delete service mariadb
 kubectl delete deployment mariadb
 kubectl delete pvc mariadb-pv-claim
 kubectl delete pv mariadb-pv-volume
-rm -r mariadb
 
 kubectl delete service grafana
 kubectl delete deployment grafana
 kubectl delete pvc grafana-pv-claim
 kubectl delete pv grafana-pv-volume
-rm -r grafana
 
 kubectl delete service nodered
 kubectl delete deployment nodered
 kubectl delete pvc nodered-pv-claim
 kubectl delete pv nodered-pv-volume
-rm -r nodered
 ```
