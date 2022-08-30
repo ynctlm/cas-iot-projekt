@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/Users/yannictalmonlarmee/Documents/Studium/Master/3. Semester/W3M20020 - Internet of Things/cas-iot-projekt/mariadb"
+    path: "/Users/yannictalmonlarmee/cas-iot-projekt/mariadb"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
