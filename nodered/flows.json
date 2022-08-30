@@ -95,6 +95,23 @@
         "verboselogging": false
     },
     {
+        "id": "aaaaebd82a7f4306",
+        "type": "chatbot-telegram-node",
+        "botname": "LYD",
+        "usernames": "",
+        "polling": "1000",
+        "store": "",
+        "log": "",
+        "debug": false,
+        "skipMediaFiles": false,
+        "webHook": "",
+        "connectMode": "polling",
+        "storeMessages": true,
+        "enableMissionControl": false,
+        "inspectMessages": true,
+        "chatbotId": ""
+    },
+    {
         "id": "174dd4ef3448faf4",
         "type": "inject",
         "z": "9f71a4ca83e0be1b",
@@ -324,25 +341,90 @@
         "useregex": false,
         "removeregexcommand": false,
         "outputs": 2,
-        "x": 150,
-        "y": 220,
+        "x": 190,
+        "y": 280,
         "wires": [
             [
-                "1dd677bd9eacf277"
+                "6313927fc02cfb67",
+                "c3167f1ccf1a67c1"
             ],
             []
         ]
     },
     {
-        "id": "1dd677bd9eacf277",
-        "type": "telegram sender",
+        "id": "6313927fc02cfb67",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "55e69db509a0e1ee",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 1",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "907c3fc70c715815",
+        "type": "chatbot-telegram-send",
+        "z": "f6f2187d.f17ca8",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 510,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c3167f1ccf1a67c1",
+        "type": "chatbot-message",
         "z": "f6f2187d.f17ca8",
         "name": "",
-        "bot": "ef17bc93ad5a76a8",
-        "haserroroutput": false,
-        "outputs": 1,
-        "x": 520,
-        "y": 220,
+        "message": [
+            {
+                "message": "Hi "
+            }
+        ],
+        "language": "none",
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "fee1f8d519c0059b",
+        "type": "chatbot-telegram-receive",
+        "z": "f6f2187d.f17ca8",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "x": 170,
+        "y": 180,
         "wires": [
             []
         ]
@@ -405,7 +487,7 @@
         "type": "debug",
         "z": "55cdbbae8fc6c215",
         "name": "inserted values",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -455,7 +537,7 @@
         "type": "function",
         "z": "55cdbbae8fc6c215",
         "name": "INSERT",
-        "func": "var temp = Math.random() * 45 - 10;\nvar humidity = Math.floor(Math.random() * 101);\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
+        "func": "var temp = msg.payload.temperature;\nvar humidity = Math.floor(Math.random() * 101);\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",

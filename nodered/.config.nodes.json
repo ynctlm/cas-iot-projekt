@@ -459,5 +459,816 @@
                 "file": "/data/node_modules/node-red-contrib-telegrambot/telegrambot/99-telegrambot.js"
             }
         }
+    },
+    "node-red-contrib-chatbot": {
+        "name": "node-red-contrib-chatbot",
+        "version": "1.0.7",
+        "local": true,
+        "user": true,
+        "nodes": {
+            "chatbot-redbot": {
+                "name": "chatbot-redbot",
+                "types": [],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-redbot.js"
+            },
+            "redbot-config": {
+                "name": "redbot-config",
+                "types": [],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/redbot.config.js"
+            },
+            "mc-base": {
+                "name": "mc-base",
+                "types": [],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-base.js"
+            },
+            "chatbot-telegram-receive": {
+                "name": "chatbot-telegram-receive",
+                "types": [
+                    "chatbot-telegram-node",
+                    "chatbot-telegram-receive",
+                    "chatbot-telegram-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-telegram-receive.js"
+            },
+            "chatbot-universal-receive": {
+                "name": "chatbot-universal-receive",
+                "types": [
+                    "chatbot-universal-node",
+                    "chatbot-universal-receive",
+                    "chatbot-universal-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-universal-receive.js"
+            },
+            "chatbot-slack-receive": {
+                "name": "chatbot-slack-receive",
+                "types": [
+                    "chatbot-slack-node",
+                    "chatbot-slack-receive",
+                    "chatbot-slack-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-slack-receive.js"
+            },
+            "chatbot-twilio-receive": {
+                "name": "chatbot-twilio-receive",
+                "types": [
+                    "chatbot-twilio-node",
+                    "chatbot-twilio-receive",
+                    "chatbot-twilio-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-twilio-receive.js"
+            },
+            "chatbot-msteams-receive": {
+                "name": "chatbot-msteams-receive",
+                "types": [
+                    "chatbot-msteams-node",
+                    "chatbot-msteams-receive",
+                    "chatbot-msteams-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-msteams-receive.js"
+            },
+            "chatbot-facebook-receive": {
+                "name": "chatbot-facebook-receive",
+                "types": [
+                    "chatbot-facebook-node",
+                    "chatbot-facebook-receive",
+                    "chatbot-facebook-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-facebook-receive.js"
+            },
+            "chatbot-viber-receive": {
+                "name": "chatbot-viber-receive",
+                "types": [
+                    "chatbot-viber-node",
+                    "chatbot-viber-receive",
+                    "chatbot-viber-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-viber-receive.js"
+            },
+            "chatbot-alexa-receive": {
+                "name": "chatbot-alexa-receive",
+                "types": [
+                    "chatbot-alexa-node",
+                    "chatbot-alexa-receive",
+                    "chatbot-alexa-send"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-receive.js"
+            },
+            "chatbot-message": {
+                "name": "chatbot-message",
+                "types": [
+                    "chatbot-message"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-message.js"
+            },
+            "chatbot-analytics": {
+                "name": "chatbot-analytics",
+                "types": [
+                    "chatbot-analytics"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-analytics.js"
+            },
+            "chatbot-context": {
+                "name": "chatbot-context",
+                "types": [
+                    "chatbot-context"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-context.js"
+            },
+            "chatbot-voice": {
+                "name": "chatbot-voice",
+                "types": [
+                    "chatbot-voice"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-voice.js"
+            },
+            "chatbot-language": {
+                "name": "chatbot-language",
+                "types": [
+                    "chatbot-language"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-language.js"
+            },
+            "chatbot-parse": {
+                "name": "chatbot-parse",
+                "types": [
+                    "chatbot-parse"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-parse.js"
+            },
+            "chatbot-document": {
+                "name": "chatbot-document",
+                "types": [
+                    "chatbot-document"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-document.js"
+            },
+            "chatbot-video": {
+                "name": "chatbot-video",
+                "types": [
+                    "chatbot-video"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-video.js"
+            },
+            "chatbot-image": {
+                "name": "chatbot-image",
+                "types": [
+                    "chatbot-image"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-image.js"
+            },
+            "chatbot-sticker": {
+                "name": "chatbot-sticker",
+                "types": [
+                    "chatbot-sticker"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-sticker.js"
+            },
+            "chatbot-animation": {
+                "name": "chatbot-animation",
+                "types": [
+                    "chatbot-animation"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-animation.js"
+            },
+            "chatbot-audio": {
+                "name": "chatbot-audio",
+                "types": [
+                    "chatbot-audio"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-audio.js"
+            },
+            "chatbot-location": {
+                "name": "chatbot-location",
+                "types": [
+                    "chatbot-location"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-location.js"
+            },
+            "chatbot-ask": {
+                "name": "chatbot-ask",
+                "types": [
+                    "chatbot-ask"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-ask.js"
+            },
+            "chatbot-inline-buttons": {
+                "name": "chatbot-inline-buttons",
+                "types": [
+                    "chatbot-inline-buttons"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-inline-buttons.js"
+            },
+            "chatbot-quick-replies": {
+                "name": "chatbot-quick-replies",
+                "types": [
+                    "chatbot-quick-replies"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-quick-replies.js"
+            },
+            "chatbot-generic-template": {
+                "name": "chatbot-generic-template",
+                "types": [
+                    "chatbot-generic-template"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-generic-template.js"
+            },
+            "chatbot-request": {
+                "name": "chatbot-request",
+                "types": [
+                    "chatbot-request"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-request.js"
+            },
+            "chatbot-log": {
+                "name": "chatbot-log",
+                "types": [
+                    "chatbot-log"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-log.js"
+            },
+            "chatbot-qrcode": {
+                "name": "chatbot-qrcode",
+                "types": [
+                    "chatbot-qrcode"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-qrcode.js"
+            },
+            "chatbot-conversation": {
+                "name": "chatbot-conversation",
+                "types": [
+                    "chatbot-conversation"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-conversation.js"
+            },
+            "chatbot-debug": {
+                "name": "chatbot-debug",
+                "types": [
+                    "chatbot-debug"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-debug.js"
+            },
+            "chatbot-waiting": {
+                "name": "chatbot-waiting",
+                "types": [
+                    "chatbot-waiting"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-waiting.js"
+            },
+            "chatbot-authorized": {
+                "name": "chatbot-authorized",
+                "types": [
+                    "chatbot-authorized"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-authorized.js"
+            },
+            "chatbot-rivescript": {
+                "name": "chatbot-rivescript",
+                "types": [
+                    "chatbot-rivescript"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-rivescript.js"
+            },
+            "chatbot-messenger-menu": {
+                "name": "chatbot-messenger-menu",
+                "types": [
+                    "chatbot-messenger-menu"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-messenger-menu.js"
+            },
+            "chatbot-messenger-template": {
+                "name": "chatbot-messenger-template",
+                "types": [
+                    "chatbot-messenger-template"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-messenger-template.js"
+            },
+            "chatbot-telegram-menu": {
+                "name": "chatbot-telegram-menu",
+                "types": [
+                    "chatbot-telegram-menu"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-telegram-menu.js"
+            },
+            "chatbot-context-store": {
+                "name": "chatbot-context-store",
+                "types": [
+                    "chatbot-context-store"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-context-store.js"
+            },
+            "chatbot-inline-query": {
+                "name": "chatbot-inline-query",
+                "types": [
+                    "chatbot-inline-query"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-inline-query.js"
+            },
+            "chatbot-dialog": {
+                "name": "chatbot-dialog",
+                "types": [
+                    "chatbot-dialog"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-dialog.js"
+            },
+            "chatbot-rules": {
+                "name": "chatbot-rules",
+                "types": [
+                    "chatbot-rules"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-rules.js"
+            },
+            "chatbot-params": {
+                "name": "chatbot-params",
+                "types": [
+                    "chatbot-params"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-params.js"
+            },
+            "chatbot-dialogflow": {
+                "name": "chatbot-dialogflow",
+                "types": [
+                    "chatbot-dialogflow-token",
+                    "chatbot-dialogflow"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-dialogflow.js"
+            },
+            "chatbot-invoice": {
+                "name": "chatbot-invoice",
+                "types": [
+                    "chatbot-invoice"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-invoice.js"
+            },
+            "chatbot-invoice-shipping": {
+                "name": "chatbot-invoice-shipping",
+                "types": [
+                    "chatbot-invoice-shipping"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-invoice-shipping.js"
+            },
+            "chatbot-extend": {
+                "name": "chatbot-extend",
+                "types": [
+                    "chatbot-extend"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-extend.js"
+            },
+            "chatbot-support-table": {
+                "name": "chatbot-support-table",
+                "types": [
+                    "chatbot-support-table"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-support-table.js"
+            },
+            "chatbot-alexa-card": {
+                "name": "chatbot-alexa-card",
+                "types": [
+                    "chatbot-alexa-card"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-card.js"
+            },
+            "chatbot-alexa-directive": {
+                "name": "chatbot-alexa-directive",
+                "types": [
+                    "chatbot-alexa-directive"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-directive.js"
+            },
+            "chatbot-broadcast": {
+                "name": "chatbot-broadcast",
+                "types": [
+                    "chatbot-broadcast"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-broadcast.js"
+            },
+            "chatbot-alexa-speech": {
+                "name": "chatbot-alexa-speech",
+                "types": [
+                    "chatbot-alexa-speech"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-alexa-speech.js"
+            },
+            "chatbot-slack-blocks": {
+                "name": "chatbot-slack-blocks",
+                "types": [
+                    "chatbot-slack-blocks"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-slack-blocks.js"
+            },
+            "chatbot-nlp": {
+                "name": "chatbot-nlp",
+                "types": [
+                    "chatbot-nlpjs"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp.js"
+            },
+            "chatbot-nlp-train": {
+                "name": "chatbot-nlp-train",
+                "types": [
+                    "chatbot-nlpjs-train"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-train.js"
+            },
+            "chatbot-nlp-intent": {
+                "name": "chatbot-nlp-intent",
+                "types": [
+                    "chatbot-nlpjs-intent"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-intent.js"
+            },
+            "chatbot-nlp-entity": {
+                "name": "chatbot-nlp-entity",
+                "types": [
+                    "chatbot-nlpjs-entity"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-entity.js"
+            },
+            "chatbot-nlp-save": {
+                "name": "chatbot-nlp-save",
+                "types": [
+                    "chatbot-nlpjs-save"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-save.js"
+            },
+            "chatbot-nlp-load": {
+                "name": "chatbot-nlp-load",
+                "types": [
+                    "chatbot-nlpjs-load"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-nlp-load.js"
+            },
+            "chatbot-pop-message": {
+                "name": "chatbot-pop-message",
+                "types": [
+                    "chatbot-pop-message"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-pop-message.js"
+            },
+            "chatbot-push-message": {
+                "name": "chatbot-push-message",
+                "types": [
+                    "chatbot-push-message"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-push-message.js"
+            },
+            "chatbot-google-analytics": {
+                "name": "chatbot-google-analytics",
+                "types": [
+                    "chatbot-google-analytics"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/chatbot-google-analytics.js"
+            },
+            "mc-graphql": {
+                "name": "mc-graphql",
+                "types": [
+                    "mc-graphql"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-graphql.js"
+            },
+            "mc-content": {
+                "name": "mc-content",
+                "types": [
+                    "mc-content"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-content.js"
+            },
+            "mc-simulator-receiver": {
+                "name": "mc-simulator-receiver",
+                "types": [
+                    "mc-simulator-receiver"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-simulator-receiver.js"
+            },
+            "mc-simulator-sender": {
+                "name": "mc-simulator-sender",
+                "types": [
+                    "mc-simulator-sender"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-simulator-sender.js"
+            },
+            "mc-user-payload": {
+                "name": "mc-user-payload",
+                "types": [
+                    "mc-user-payload"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-user-payload.js"
+            },
+            "mc-input": {
+                "name": "mc-input",
+                "types": [
+                    "mc-input"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-input.js"
+            },
+            "mc-output": {
+                "name": "mc-output",
+                "types": [
+                    "mc-output"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-output.js"
+            },
+            "mc-configuration": {
+                "name": "mc-configuration",
+                "types": [
+                    "mc-configuration"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-configuration.js"
+            },
+            "mc-queue": {
+                "name": "mc-queue",
+                "types": [
+                    "mc-queue"
+                ],
+                "enabled": true,
+                "local": true,
+                "user": false,
+                "module": "node-red-contrib-chatbot",
+                "file": "/data/node_modules/node-red-contrib-chatbot/nodes/mc-queue.js"
+            }
+        }
     }
 }
