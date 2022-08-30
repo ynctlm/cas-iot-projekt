@@ -102,7 +102,7 @@
         "polling": "1000",
         "store": "",
         "log": "",
-        "debug": false,
+        "debug": true,
         "skipMediaFiles": false,
         "webHook": "",
         "connectMode": "polling",
@@ -110,6 +110,31 @@
         "enableMissionControl": false,
         "inspectMessages": true,
         "chatbotId": ""
+    },
+    {
+        "id": "da73d63f75522f05",
+        "type": "telegram bot",
+        "botname": "Test",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
     },
     {
         "id": "174dd4ef3448faf4",
@@ -326,62 +351,21 @@
         ]
     },
     {
-        "id": "ec2b8b4eac72a1e3",
-        "type": "telegram command",
-        "z": "f6f2187d.f17ca8",
-        "name": "",
-        "command": "/temperature",
-        "description": "",
-        "registercommand": false,
-        "language": "",
-        "scope": "default",
-        "bot": "ef17bc93ad5a76a8",
-        "strict": false,
-        "hasresponse": true,
-        "useregex": false,
-        "removeregexcommand": false,
-        "outputs": 2,
-        "x": 190,
-        "y": 280,
-        "wires": [
-            [
-                "6313927fc02cfb67"
-            ],
-            []
-        ]
-    },
-    {
         "id": "6313927fc02cfb67",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
         "name": "debug 1",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 520,
-        "y": 320,
+        "x": 660,
+        "y": 60,
         "wires": []
-    },
-    {
-        "id": "55e69db509a0e1ee",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "name": "function 1",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 240,
-        "y": 380,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "907c3fc70c715815",
@@ -393,8 +377,8 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 510,
-        "y": 220,
+        "x": 710,
+        "y": 200,
         "wires": []
     },
     {
@@ -404,12 +388,12 @@
         "name": "",
         "message": [
             {
-                "message": "Hi {{userId}}"
+                "message": "{{payload.sensor}} - {{payload.temperature}} C°"
             }
         ],
         "language": "none",
-        "x": 390,
-        "y": 140,
+        "x": 550,
+        "y": 200,
         "wires": [
             [
                 "907c3fc70c715815"
@@ -421,12 +405,134 @@
         "type": "chatbot-telegram-receive",
         "z": "f6f2187d.f17ca8",
         "bot": "aaaaebd82a7f4306",
-        "botProduction": "",
-        "x": 170,
+        "botProduction": "aaaaebd82a7f4306",
+        "x": 130,
         "y": 180,
         "wires": [
             [
+                "4ffd4d8815f4acb6",
+                "9ff27cb3f6af3d1e"
+            ]
+        ]
+    },
+    {
+        "id": "97322ec063f560b6",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "LM35/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "d880f4faf167b53f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "ce088101b63f5987",
+                "96e8f86f9889cad6"
+            ]
+        ]
+    },
+    {
+        "id": "9ff27cb3f6af3d1e",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 1",
+        "func": "msg.payload = flow.get(\"mydata\");\n\n\nnode.warn(msg.payload);\n\n\n//node.warn(flow.get(\"mydata\"));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 280,
+        "wires": [
+            [
                 "c3167f1ccf1a67c1"
+            ]
+        ]
+    },
+    {
+        "id": "ce088101b63f5987",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "96e8f86f9889cad6",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "function 2",
+        "func": "flow.set(\"mydata\",\"\");\nflow.set(\"mydata\",msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 40,
+        "wires": [
+            [
+                "6313927fc02cfb67"
+            ]
+        ]
+    },
+    {
+        "id": "4ffd4d8815f4acb6",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 220,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "865300ebb2bcc2e8",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "9ff27cb3f6af3d1e"
             ]
         ]
     },
@@ -538,7 +644,7 @@
         "type": "function",
         "z": "55cdbbae8fc6c215",
         "name": "INSERT",
-        "func": "var temp = msg.payload.temperature;\nvar humidity = Math.floor(Math.random() * 101);\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
+        "func": "var temp = msg.payload.temperature;\n\n// da es keinen Feuchtigkeitssensor gibt, Werte simulieren\nvar humidity = Math.floor(Math.abs(msg.payload.temperature)) + 25;\n\nif (humidity > 100) {\n    humidity = humidity - 25;\n}\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
