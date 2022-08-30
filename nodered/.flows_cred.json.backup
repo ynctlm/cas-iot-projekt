@@ -3,6 +3,9 @@
         "user": "root",
         "password": "mysecretpw"
     },
-    "d880f4faf167b53f": {},
+    "d880f4faf167b53f": {
+        "user": "dbt",
+        "password": "dbt"
+    },
     "ef17bc93ad5a76a8": {}
 }

@@ -324,10 +324,12 @@
         "useregex": false,
         "removeregexcommand": false,
         "outputs": 2,
-        "x": 170,
-        "y": 520,
+        "x": 150,
+        "y": 220,
         "wires": [
-            [],
+            [
+                "1dd677bd9eacf277"
+            ],
             []
         ]
     },
@@ -339,8 +341,8 @@
         "bot": "ef17bc93ad5a76a8",
         "haserroroutput": false,
         "outputs": 1,
-        "x": 420,
-        "y": 520,
+        "x": 520,
+        "y": 220,
         "wires": [
             []
         ]
@@ -358,11 +360,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 210,
-        "y": 140,
+        "x": 130,
+        "y": 200,
         "wires": [
             [
-                "691837b0c886006e"
+                "691837b0c886006e",
+                "6239720a629f32fb"
             ]
         ]
     },
@@ -370,7 +373,7 @@
         "id": "691837b0c886006e",
         "type": "debug",
         "z": "55cdbbae8fc6c215",
-        "name": "debug 2",
+        "name": "MQTT payload",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -379,8 +382,91 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 460,
+        "x": 320,
         "y": 140,
         "wires": []
+    },
+    {
+        "id": "45c7522ecbb427e6",
+        "type": "mysql",
+        "z": "55cdbbae8fc6c215",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "8e411fc65978e445"
+            ]
+        ]
+    },
+    {
+        "id": "2e338baa79d4d15b",
+        "type": "debug",
+        "z": "55cdbbae8fc6c215",
+        "name": "inserted values",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "b0638143c9a50bbd",
+        "type": "mysql",
+        "z": "55cdbbae8fc6c215",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 440,
+        "y": 260,
+        "wires": [
+            [
+                "2e338baa79d4d15b"
+            ]
+        ]
+    },
+    {
+        "id": "8e411fc65978e445",
+        "type": "function",
+        "z": "55cdbbae8fc6c215",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT * FROM data ORDER BY datetime DESC LIMIT 1;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 260,
+        "wires": [
+            [
+                "b0638143c9a50bbd"
+            ]
+        ]
+    },
+    {
+        "id": "6239720a629f32fb",
+        "type": "function",
+        "z": "55cdbbae8fc6c215",
+        "name": "INSERT",
+        "func": "var temp = Math.random() * 45 - 10;\nvar humidity = Math.floor(Math.random() * 101);\n\nmsg.topic = `INSERT INTO data (datetime, temp, humidity) VALUES (UTC_TIMESTAMP(), ${temp}, ${humidity})`;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "45c7522ecbb427e6"
+            ]
+        ]
     }
 ]
