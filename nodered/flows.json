@@ -18,7 +18,7 @@
     {
         "id": "f6f2187d.f17ca8",
         "type": "tab",
-        "label": "Telegram: Temperatur",
+        "label": "Telegram-Bot",
         "disabled": false,
         "info": ""
     },
@@ -29,6 +29,72 @@
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "60a563125e5b0d46",
+        "type": "subflow",
+        "name": "/temperature",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "9ff27cb3f6af3d1e"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 460,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "c3167f1ccf1a67c1",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "0f8381518f6a674a",
+        "type": "subflow",
+        "name": "location",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 40,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "f401c8a661d79efc"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 500,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "37bd1fd47766db0e",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
     },
     {
         "id": "80147cce57e9dcd0",
@@ -54,41 +120,6 @@
         "y": 19,
         "w": 592,
         "h": 162
-    },
-    {
-        "id": "d81844af2440b285",
-        "type": "group",
-        "z": "f6f2187d.f17ca8",
-        "style": {
-            "stroke": "#999999",
-            "stroke-opacity": "1",
-            "fill": "none",
-            "fill-opacity": "1",
-            "label": true,
-            "label-position": "nw",
-            "color": "#a4a4a4"
-        },
-        "nodes": [
-            "907c3fc70c715815",
-            "c3167f1ccf1a67c1",
-            "fee1f8d519c0059b",
-            "9ff27cb3f6af3d1e",
-            "a4406974266b7e18",
-            "f016964d61ff14f7",
-            "b916de78dd76d069",
-            "d7be776664af284e",
-            "f1011432c91d11af",
-            "613378bb8dfd6b65",
-            "80ac39183594529a",
-            "422a56e4934c1a57",
-            "baee4e03d00eccda",
-            "22a62ba4f56ec442",
-            "67d53191bdaf9833"
-        ],
-        "x": 14,
-        "y": 199,
-        "w": 832,
-        "h": 382
     },
     {
         "id": "55bc388994a74c02",
@@ -146,6 +177,157 @@
         "enableMissionControl": false,
         "inspectMessages": true,
         "chatbotId": ""
+    },
+    {
+        "id": "22a62ba4f56ec442",
+        "type": "comment",
+        "z": "60a563125e5b0d46",
+        "name": "/temperature: Zuletzt empfangene Temperatur des Sensors wird versendet",
+        "info": "",
+        "x": 400,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "9ff27cb3f6af3d1e",
+        "type": "function",
+        "z": "60a563125e5b0d46",
+        "name": "getBuffer",
+        "func": "msg.payload = flow.get(\"mydata\");\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 120,
+        "wires": [
+            [
+                "c3167f1ccf1a67c1"
+            ]
+        ]
+    },
+    {
+        "id": "c3167f1ccf1a67c1",
+        "type": "chatbot-message",
+        "z": "60a563125e5b0d46",
+        "name": "",
+        "message": [
+            {
+                "message": "Am Sensor {{payload.sensor}} wurden zuletzt {{payload.temperature}}°C gemessen."
+            }
+        ],
+        "language": "none",
+        "x": 330,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "53b95bb914686140",
+        "type": "comment",
+        "z": "0f8381518f6a674a",
+        "name": "Standort: Wetter am Standort wird per API abgerufen und versendet",
+        "info": "",
+        "x": 420,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "f401c8a661d79efc",
+        "type": "function",
+        "z": "0f8381518f6a674a",
+        "name": "getWeatherApiUrl",
+        "func": "//node.warn(msg.payload)\n\nvar lat = msg.payload.content.latitude;\nvar lon = msg.payload.content.longitude;\nvar api_key = \"aa0e26096b13caf4085d934cb5b39c37\"\nvar units = \"metric\"\nvar lang = \"de\"\n\nmsg.payload = `lat: ${lat}, lon: ${lon}`\nmsg.url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=${units}&lang=${lang}`\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 120,
+        "wires": [
+            [
+                "0749ca457322c3ad"
+            ]
+        ]
+    },
+    {
+        "id": "0749ca457322c3ad",
+        "type": "http request",
+        "z": "0f8381518f6a674a",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 390,
+        "y": 120,
+        "wires": [
+            [
+                "fea74dddaad97ab2"
+            ]
+        ]
+    },
+    {
+        "id": "fea74dddaad97ab2",
+        "type": "json",
+        "z": "0f8381518f6a674a",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "b76cf9dd08540fbf"
+            ]
+        ]
+    },
+    {
+        "id": "37bd1fd47766db0e",
+        "type": "chatbot-message",
+        "z": "0f8381518f6a674a",
+        "name": "",
+        "message": [
+            {
+                "message": "Das Wetter in {{payload.name}} ist: {{payload.weather}} bei {{payload.temp}}°C und {{payload.humidity}}% Luftfeuchtigkeit."
+            }
+        ],
+        "language": "none",
+        "x": 370,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b76cf9dd08540fbf",
+        "type": "function",
+        "z": "0f8381518f6a674a",
+        "name": "getWeather",
+        "func": "msg.payload.temp = Math.round(msg.payload.main.temp);\nmsg.payload.humidity = msg.payload.main.humidity;\nmsg.payload.weather = msg.payload.weather[0].description;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "37bd1fd47766db0e"
+            ]
+        ]
     },
     {
         "id": "174dd4ef3448faf4",
@@ -245,7 +427,7 @@
         "type": "function",
         "z": "9f71a4ca83e0be1b",
         "name": "CREATE TABLE",
-        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int);`;\nreturn msg;",
+        "func": "msg.topic = `CREATE TABLE IF NOT EXISTS data (datetime datetime, temp decimal(4,1), humidity int);`\n            + `CREATE TABLE IF NOT EXISTS servo (id int, status bit, UNIQUE (id));`\n            + `INSERT IGNORE INTO servo (id, status) VALUES (1, 0);`;\n\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -383,42 +565,20 @@
         "id": "907c3fc70c715815",
         "type": "chatbot-telegram-send",
         "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
         "bot": "aaaaebd82a7f4306",
         "botProduction": "",
         "track": false,
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 730,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "c3167f1ccf1a67c1",
-        "type": "chatbot-message",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "",
-        "message": [
-            {
-                "message": "Am Sensor {{payload.sensor}} wurden zuletzt {{payload.temperature}}°C gemessen."
-            }
-        ],
-        "language": "none",
         "x": 570,
-        "y": 360,
-        "wires": [
-            [
-                "907c3fc70c715815"
-            ]
-        ]
+        "y": 440,
+        "wires": []
     },
     {
         "id": "fee1f8d519c0059b",
         "type": "chatbot-telegram-receive",
         "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
         "bot": "aaaaebd82a7f4306",
         "botProduction": "aaaaebd82a7f4306",
         "x": 130,
@@ -452,26 +612,6 @@
         ]
     },
     {
-        "id": "9ff27cb3f6af3d1e",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "getBuffer",
-        "func": "msg.payload = flow.get(\"mydata\");\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 440,
-        "y": 360,
-        "wires": [
-            [
-                "c3167f1ccf1a67c1"
-            ]
-        ]
-    },
-    {
         "id": "96e8f86f9889cad6",
         "type": "function",
         "z": "f6f2187d.f17ca8",
@@ -495,7 +635,6 @@
         "id": "a4406974266b7e18",
         "type": "switch",
         "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
         "name": "",
         "property": "payload.type",
         "propertyType": "msg",
@@ -521,145 +660,37 @@
                 "f1011432c91d11af"
             ],
             [
-                "f016964d61ff14f7"
+                "d9187248cca46bdf"
             ]
         ]
-    },
-    {
-        "id": "f016964d61ff14f7",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "getWeatherApiUrl",
-        "func": "//node.warn(msg.payload)\n\nvar lat = msg.payload.content.latitude;\nvar lon = msg.payload.content.longitude;\nvar api_key = \"aa0e26096b13caf4085d934cb5b39c37\"\nvar units = \"metric\"\nvar lang = \"de\"\n\nmsg.payload = `lat: ${lat}, lon: ${lon}`\nmsg.url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=${units}&lang=${lang}`\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 130,
-        "y": 480,
-        "wires": [
-            [
-                "613378bb8dfd6b65"
-            ]
-        ]
-    },
-    {
-        "id": "b916de78dd76d069",
-        "type": "chatbot-message",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "",
-        "message": [
-            {
-                "message": "Das Wetter in {{payload.name}} ist: {{payload.weather}} bei {{payload.temp}}°C und {{payload.humidity}}% Luftfeuchtigkeit."
-            }
-        ],
-        "language": "none",
-        "x": 290,
-        "y": 540,
-        "wires": [
-            [
-                "d7be776664af284e"
-            ]
-        ]
-    },
-    {
-        "id": "d7be776664af284e",
-        "type": "chatbot-telegram-send",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "bot": "aaaaebd82a7f4306",
-        "botProduction": "",
-        "track": false,
-        "passThrough": false,
-        "errorOutput": false,
-        "outputs": 0,
-        "x": 490,
-        "y": 540,
-        "wires": []
     },
     {
         "id": "f1011432c91d11af",
         "type": "chatbot-rules",
         "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "MessageCommand",
+        "name": "Command is ...",
         "rules": [
+            {
+                "type": "command",
+                "command": "/openwindow"
+            },
+            {
+                "type": "command",
+                "command": "/closewindow"
+            },
             {
                 "type": "command",
                 "command": "/temperature"
             }
         ],
-        "outputs": 1,
-        "x": 270,
+        "outputs": 3,
+        "x": 260,
         "y": 360,
         "wires": [
+            [],
+            [],
             [
-                "9ff27cb3f6af3d1e"
-            ]
-        ]
-    },
-    {
-        "id": "613378bb8dfd6b65",
-        "type": "http request",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "",
-        "method": "GET",
-        "ret": "txt",
-        "paytoqs": "ignore",
-        "url": "",
-        "tls": "",
-        "persist": false,
-        "proxy": "",
-        "insecureHTTPParser": false,
-        "authType": "",
-        "senderr": false,
-        "headers": [],
-        "x": 310,
-        "y": 480,
-        "wires": [
-            [
-                "80ac39183594529a"
-            ]
-        ]
-    },
-    {
-        "id": "80ac39183594529a",
-        "type": "json",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "",
-        "property": "payload",
-        "action": "",
-        "pretty": false,
-        "x": 450,
-        "y": 480,
-        "wires": [
-            [
-                "422a56e4934c1a57"
-            ]
-        ]
-    },
-    {
-        "id": "422a56e4934c1a57",
-        "type": "function",
-        "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "getWeather",
-        "func": "msg.payload.temp = Math.round(msg.payload.main.temp);\nmsg.payload.humidity = msg.payload.main.humidity;\nmsg.payload.weather = msg.payload.weather[0].description;\n\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 110,
-        "y": 540,
-        "wires": [
-            [
-                "b916de78dd76d069"
+                "f267f9c48fb8d15d"
             ]
         ]
     },
@@ -689,7 +720,6 @@
         "id": "baee4e03d00eccda",
         "type": "comment",
         "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
         "name": "Telegram-Bot akzeptiert: /temperature als Text oder einen gesendeten Standort",
         "info": "",
         "x": 320,
@@ -697,25 +727,78 @@
         "wires": []
     },
     {
-        "id": "22a62ba4f56ec442",
-        "type": "comment",
+        "id": "f267f9c48fb8d15d",
+        "type": "subflow:60a563125e5b0d46",
         "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "/temperature: Zuletzt empfangene Temperatur des Sensors wird versendet",
-        "info": "",
-        "x": 540,
-        "y": 320,
-        "wires": []
+        "name": "... /temperature",
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
     },
     {
-        "id": "67d53191bdaf9833",
-        "type": "comment",
+        "id": "d9187248cca46bdf",
+        "type": "subflow:0f8381518f6a674a",
         "z": "f6f2187d.f17ca8",
-        "g": "d81844af2440b285",
-        "name": "Standort: Wetter am Standort wird per API abgerufen und versendet",
-        "info": "",
+        "name": "Wetter für Standort senden",
         "x": 340,
-        "y": 440,
+        "y": 460,
+        "wires": [
+            [
+                "907c3fc70c715815"
+            ]
+        ]
+    },
+    {
+        "id": "3f2ac5be864f9de0",
+        "type": "mysql",
+        "z": "f6f2187d.f17ca8",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "e61109983e520209"
+            ]
+        ]
+    },
+    {
+        "id": "b51f61187c21987d",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 320,
+        "wires": [
+            [
+                "3f2ac5be864f9de0"
+            ]
+        ]
+    },
+    {
+        "id": "e61109983e520209",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 320,
         "wires": []
     },
     {
@@ -745,7 +828,7 @@
         "type": "debug",
         "z": "55cdbbae8fc6c215",
         "name": "MQTT payload",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
