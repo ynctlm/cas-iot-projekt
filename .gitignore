@@ -9,4 +9,4 @@ mariadb
 # exclude nodered folders (node_modules is needed to prevent the need to install packages manually) --> better for testing
 nodered/.npm
 nodered/lib
-nodered/flows.json
+nodered/dist-plugins

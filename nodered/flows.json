@@ -18,7 +18,7 @@
     {
         "id": "f6f2187d.f17ca8",
         "type": "tab",
-        "label": "Telegram-Bot",
+        "label": "Telegram: Temperatur",
         "disabled": false,
         "info": ""
     },
@@ -29,6 +29,66 @@
         "disabled": false,
         "info": "",
         "env": []
+    },
+    {
+        "id": "80147cce57e9dcd0",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "6313927fc02cfb67",
+            "97322ec063f560b6",
+            "96e8f86f9889cad6",
+            "f3547f6542d13146",
+            "de5a47c221b90108"
+        ],
+        "x": 14,
+        "y": 19,
+        "w": 592,
+        "h": 162
+    },
+    {
+        "id": "d81844af2440b285",
+        "type": "group",
+        "z": "f6f2187d.f17ca8",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "907c3fc70c715815",
+            "c3167f1ccf1a67c1",
+            "fee1f8d519c0059b",
+            "9ff27cb3f6af3d1e",
+            "a4406974266b7e18",
+            "f016964d61ff14f7",
+            "b916de78dd76d069",
+            "d7be776664af284e",
+            "f1011432c91d11af",
+            "613378bb8dfd6b65",
+            "80ac39183594529a",
+            "422a56e4934c1a57",
+            "baee4e03d00eccda",
+            "22a62ba4f56ec442",
+            "67d53191bdaf9833"
+        ],
+        "x": 14,
+        "y": 199,
+        "w": 832,
+        "h": 382
     },
     {
         "id": "55bc388994a74c02",
@@ -71,30 +131,6 @@
         "sessionExpiry": ""
     },
     {
-        "id": "ef17bc93ad5a76a8",
-        "type": "telegram bot",
-        "botname": "LYD",
-        "usernames": "",
-        "chatids": "",
-        "baseapiurl": "",
-        "updatemode": "polling",
-        "pollinterval": "300",
-        "usesocks": false,
-        "sockshost": "",
-        "socksport": "6667",
-        "socksusername": "anonymous",
-        "sockspassword": "",
-        "bothost": "",
-        "botpath": "",
-        "localbotport": "8443",
-        "publicbotport": "8443",
-        "privatekey": "",
-        "certificate": "",
-        "useselfsignedcertificate": false,
-        "sslterminated": false,
-        "verboselogging": false
-    },
-    {
         "id": "aaaaebd82a7f4306",
         "type": "chatbot-telegram-node",
         "botname": "LYD",
@@ -110,31 +146,6 @@
         "enableMissionControl": false,
         "inspectMessages": true,
         "chatbotId": ""
-    },
-    {
-        "id": "da73d63f75522f05",
-        "type": "telegram bot",
-        "botname": "Test",
-        "usernames": "",
-        "chatids": "",
-        "baseapiurl": "",
-        "updatemode": "polling",
-        "pollinterval": "300",
-        "usesocks": false,
-        "sockshost": "",
-        "socksprotocol": "socks5",
-        "socksport": "6667",
-        "socksusername": "anonymous",
-        "sockspassword": "",
-        "bothost": "",
-        "botpath": "",
-        "localbotport": "8443",
-        "publicbotport": "8443",
-        "privatekey": "",
-        "certificate": "",
-        "useselfsignedcertificate": false,
-        "sslterminated": false,
-        "verboselogging": false
     },
     {
         "id": "174dd4ef3448faf4",
@@ -354,6 +365,7 @@
         "id": "6313927fc02cfb67",
         "type": "debug",
         "z": "f6f2187d.f17ca8",
+        "g": "80147cce57e9dcd0",
         "name": "CurrentBuffer",
         "active": false,
         "tosidebar": true,
@@ -363,14 +375,15 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 520,
-        "y": 60,
+        "x": 480,
+        "y": 140,
         "wires": []
     },
     {
         "id": "907c3fc70c715815",
         "type": "chatbot-telegram-send",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "bot": "aaaaebd82a7f4306",
         "botProduction": "",
         "track": false,
@@ -378,13 +391,14 @@
         "errorOutput": false,
         "outputs": 0,
         "x": 730,
-        "y": 240,
+        "y": 360,
         "wires": []
     },
     {
         "id": "c3167f1ccf1a67c1",
         "type": "chatbot-message",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "",
         "message": [
             {
@@ -393,7 +407,7 @@
         ],
         "language": "none",
         "x": 570,
-        "y": 240,
+        "y": 360,
         "wires": [
             [
                 "907c3fc70c715815"
@@ -404,10 +418,11 @@
         "id": "fee1f8d519c0059b",
         "type": "chatbot-telegram-receive",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "bot": "aaaaebd82a7f4306",
         "botProduction": "aaaaebd82a7f4306",
         "x": 130,
-        "y": 160,
+        "y": 280,
         "wires": [
             [
                 "a4406974266b7e18"
@@ -418,6 +433,7 @@
         "id": "97322ec063f560b6",
         "type": "mqtt in",
         "z": "f6f2187d.f17ca8",
+        "g": "80147cce57e9dcd0",
         "name": "",
         "topic": "LM35/temperature",
         "qos": "0",
@@ -427,8 +443,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 170,
-        "y": 60,
+        "x": 130,
+        "y": 140,
         "wires": [
             [
                 "96e8f86f9889cad6"
@@ -439,6 +455,7 @@
         "id": "9ff27cb3f6af3d1e",
         "type": "function",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "getBuffer",
         "func": "msg.payload = flow.get(\"mydata\");\n\nreturn msg;",
         "outputs": 1,
@@ -447,7 +464,7 @@
         "finalize": "",
         "libs": [],
         "x": 440,
-        "y": 240,
+        "y": 360,
         "wires": [
             [
                 "c3167f1ccf1a67c1"
@@ -458,6 +475,7 @@
         "id": "96e8f86f9889cad6",
         "type": "function",
         "z": "f6f2187d.f17ca8",
+        "g": "80147cce57e9dcd0",
         "name": "createBuffer",
         "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nflow.set(\"mydata\", msg.payload);\nreturn msg;",
         "outputs": 1,
@@ -465,8 +483,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
-        "y": 60,
+        "x": 310,
+        "y": 140,
         "wires": [
             [
                 "6313927fc02cfb67"
@@ -477,6 +495,7 @@
         "id": "a4406974266b7e18",
         "type": "switch",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "",
         "property": "payload.type",
         "propertyType": "msg",
@@ -496,7 +515,7 @@
         "repair": false,
         "outputs": 2,
         "x": 90,
-        "y": 240,
+        "y": 360,
         "wires": [
             [
                 "f1011432c91d11af"
@@ -510,6 +529,7 @@
         "id": "f016964d61ff14f7",
         "type": "function",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "getWeatherApiUrl",
         "func": "//node.warn(msg.payload)\n\nvar lat = msg.payload.content.latitude;\nvar lon = msg.payload.content.longitude;\nvar api_key = \"aa0e26096b13caf4085d934cb5b39c37\"\nvar units = \"metric\"\nvar lang = \"de\"\n\nmsg.payload = `lat: ${lat}, lon: ${lon}`\nmsg.url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=${units}&lang=${lang}`\n\nreturn msg;",
         "outputs": 1,
@@ -518,7 +538,7 @@
         "finalize": "",
         "libs": [],
         "x": 130,
-        "y": 320,
+        "y": 480,
         "wires": [
             [
                 "613378bb8dfd6b65"
@@ -529,6 +549,7 @@
         "id": "b916de78dd76d069",
         "type": "chatbot-message",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "",
         "message": [
             {
@@ -537,7 +558,7 @@
         ],
         "language": "none",
         "x": 290,
-        "y": 380,
+        "y": 540,
         "wires": [
             [
                 "d7be776664af284e"
@@ -548,6 +569,7 @@
         "id": "d7be776664af284e",
         "type": "chatbot-telegram-send",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "bot": "aaaaebd82a7f4306",
         "botProduction": "",
         "track": false,
@@ -555,13 +577,14 @@
         "errorOutput": false,
         "outputs": 0,
         "x": 490,
-        "y": 380,
+        "y": 540,
         "wires": []
     },
     {
         "id": "f1011432c91d11af",
         "type": "chatbot-rules",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "MessageCommand",
         "rules": [
             {
@@ -571,7 +594,7 @@
         ],
         "outputs": 1,
         "x": 270,
-        "y": 240,
+        "y": 360,
         "wires": [
             [
                 "9ff27cb3f6af3d1e"
@@ -582,6 +605,7 @@
         "id": "613378bb8dfd6b65",
         "type": "http request",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "",
         "method": "GET",
         "ret": "txt",
@@ -595,7 +619,7 @@
         "senderr": false,
         "headers": [],
         "x": 310,
-        "y": 320,
+        "y": 480,
         "wires": [
             [
                 "80ac39183594529a"
@@ -606,12 +630,13 @@
         "id": "80ac39183594529a",
         "type": "json",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "",
         "property": "payload",
         "action": "",
         "pretty": false,
         "x": 450,
-        "y": 320,
+        "y": 480,
         "wires": [
             [
                 "422a56e4934c1a57"
@@ -622,6 +647,7 @@
         "id": "422a56e4934c1a57",
         "type": "function",
         "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
         "name": "getWeather",
         "func": "msg.payload.temp = Math.round(msg.payload.main.temp);\nmsg.payload.humidity = msg.payload.main.humidity;\nmsg.payload.weather = msg.payload.weather[0].description;\n\nreturn msg;",
         "outputs": 1,
@@ -630,12 +656,67 @@
         "finalize": "",
         "libs": [],
         "x": 110,
-        "y": 380,
+        "y": 540,
         "wires": [
             [
                 "b916de78dd76d069"
             ]
         ]
+    },
+    {
+        "id": "f3547f6542d13146",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "80147cce57e9dcd0",
+        "name": "MQTT-Daten in Buffer speichern, um sie in Telegram zu versenden",
+        "info": "",
+        "x": 280,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "de5a47c221b90108",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "80147cce57e9dcd0",
+        "name": "Grund: Telegram-Bot soll auch ohne Datenbank funktionieren",
+        "info": "",
+        "x": 260,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "baee4e03d00eccda",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
+        "name": "Telegram-Bot akzeptiert: /temperature als Text oder einen gesendeten Standort",
+        "info": "",
+        "x": 320,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "22a62ba4f56ec442",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
+        "name": "/temperature: Zuletzt empfangene Temperatur des Sensors wird versendet",
+        "info": "",
+        "x": 540,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "67d53191bdaf9833",
+        "type": "comment",
+        "z": "f6f2187d.f17ca8",
+        "g": "d81844af2440b285",
+        "name": "Standort: Wetter am Standort wird per API abgerufen und versendet",
+        "info": "",
+        "x": 340,
+        "y": 440,
+        "wires": []
     },
     {
         "id": "07ceb05b0b1195ea",
@@ -673,7 +754,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 320,
-        "y": 140,
+        "y": 120,
         "wires": []
     },
     {
