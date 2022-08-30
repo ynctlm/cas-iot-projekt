@@ -64,7 +64,7 @@
         "z": "9f71a4ca83e0be1b",
         "name": "README",
         "info": "Die Datenbanktabelle muss angelegt werden. \nHierzu muss eine beliebige Node in Node-RED ca. 60 Sekunden nach Start der MariaDB verschoben werden. \nDann kann per Klick auf \"Übernahme (deploy)\" die Datenbank initialisiert werden.",
-        "x": 140,
+        "x": 160,
         "y": 60,
         "wires": []
     },
@@ -132,7 +132,9 @@
         "x": 300,
         "y": 140,
         "wires": [
-            []
+            [
+                "2cb819b933614b67"
+            ]
         ]
     },
     {
