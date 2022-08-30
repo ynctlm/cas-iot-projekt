@@ -102,7 +102,7 @@
         "polling": "1000",
         "store": "",
         "log": "",
-        "debug": true,
+        "debug": false,
         "skipMediaFiles": false,
         "webHook": "",
         "connectMode": "polling",
@@ -355,7 +355,7 @@
         "type": "debug",
         "z": "f6f2187d.f17ca8",
         "name": "CurrentBuffer",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -459,7 +459,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "createBuffer",
-        "func": "msg.payload.temperature = msg.payload.temperature.toFixed(1);\n\nvar date = new Date();\nvar day = date.getDay();\nvar month = date.getMonth();\nvar year = date.getFullYear();\nvar hour = date.getHours();\nvar minute = date.getMinutes();\nvar second = date.getSeconds()\n\nmsg.payload.date = `${day}.${month}.${year} ${hour}:${minute}:${second}`\nflow.set(\"mydata\", msg.payload);\nreturn msg;",
+        "func": "msg.payload.temperature = Math.round(msg.payload.temperature);\n\nvar date = new Date();\nvar day = date.getDay();\nvar month = date.getMonth();\nvar year = date.getFullYear();\nvar hour = date.getHours();\nvar minute = date.getMinutes();\nvar second = date.getSeconds()\n\nmsg.payload.date = `${day}.${month}.${year} ${hour}:${minute}:${second}`\nflow.set(\"mydata\", msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -510,18 +510,18 @@
         "id": "f016964d61ff14f7",
         "type": "function",
         "z": "f6f2187d.f17ca8",
-        "name": "getWeatherForLocation",
-        "func": "var lat = msg.payload.content.latitude;\nvar lon = msg.payload.content.longitude;\n\nmsg.payload = `lat: ${lat}, lon: ${lon}`\nnode.warn(msg.payload);\n\n\n//node.warn(flow.get(\"mydata\"));\nreturn msg;",
+        "name": "getWeatherApiUrl",
+        "func": "//node.warn(msg.payload)\n\nvar lat = msg.payload.content.latitude;\nvar lon = msg.payload.content.longitude;\nvar api_key = \"aa0e26096b13caf4085d934cb5b39c37\"\nvar units = \"metric\"\nvar lang = \"de\"\n\nmsg.payload = `lat: ${lat}, lon: ${lon}`\nmsg.url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=${units}&lang=${lang}`\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 150,
+        "x": 130,
         "y": 320,
         "wires": [
             [
-                "b916de78dd76d069"
+                "613378bb8dfd6b65"
             ]
         ]
     },
@@ -532,11 +532,11 @@
         "name": "",
         "message": [
             {
-                "message": "{{payload}}"
+                "message": "Das Wetter in {{payload.name}} ist: {{payload.weather}} bei {{payload.temp}}°C und {{payload.humidity}}% Luftfeuchtigkeit."
             }
         ],
         "language": "none",
-        "x": 330,
+        "x": 430,
         "y": 320,
         "wires": [
             [
@@ -554,7 +554,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 490,
+        "x": 590,
         "y": 320,
         "wires": []
     },
@@ -575,6 +575,65 @@
         "wires": [
             [
                 "9ff27cb3f6af3d1e"
+            ]
+        ]
+    },
+    {
+        "id": "613378bb8dfd6b65",
+        "type": "http request",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 170,
+        "y": 380,
+        "wires": [
+            [
+                "80ac39183594529a"
+            ]
+        ]
+    },
+    {
+        "id": "80ac39183594529a",
+        "type": "json",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 330,
+        "y": 380,
+        "wires": [
+            [
+                "422a56e4934c1a57"
+            ]
+        ]
+    },
+    {
+        "id": "422a56e4934c1a57",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "getWeather",
+        "func": "msg.payload.temp = Math.round(msg.payload.main.temp);\nmsg.payload.humidity = msg.payload.main.humidity;\nmsg.payload.weather = msg.payload.weather[0].description;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "b916de78dd76d069"
             ]
         ]
     },
@@ -605,7 +664,7 @@
         "type": "debug",
         "z": "55cdbbae8fc6c215",
         "name": "MQTT payload",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
