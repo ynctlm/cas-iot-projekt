@@ -16,6 +16,21 @@
         "env": []
     },
     {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Telegram-Bot",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "55cdbbae8fc6c215",
+        "type": "tab",
+        "label": "MQTT-Handling",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "55bc388994a74c02",
         "type": "MySQLdatabase",
         "name": "MariaDB_weather",
@@ -24,6 +39,60 @@
         "db": "weather",
         "tz": "",
         "charset": "UTF8"
+    },
+    {
+        "id": "d880f4faf167b53f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mq.jreichwald.de",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ef17bc93ad5a76a8",
+        "type": "telegram bot",
+        "botname": "LYD",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
     },
     {
         "id": "174dd4ef3448faf4",
@@ -238,5 +307,80 @@
                 "1b1820eba2eadff8"
             ]
         ]
+    },
+    {
+        "id": "ec2b8b4eac72a1e3",
+        "type": "telegram command",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "command": "/temperature",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "ef17bc93ad5a76a8",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 520,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1dd677bd9eacf277",
+        "type": "telegram sender",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "bot": "ef17bc93ad5a76a8",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "07ceb05b0b1195ea",
+        "type": "mqtt in",
+        "z": "55cdbbae8fc6c215",
+        "name": "",
+        "topic": "DH11/temperature",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "d880f4faf167b53f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "691837b0c886006e"
+            ]
+        ]
+    },
+    {
+        "id": "691837b0c886006e",
+        "type": "debug",
+        "z": "55cdbbae8fc6c215",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 140,
+        "wires": []
     }
 ]
