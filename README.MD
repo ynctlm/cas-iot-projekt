@@ -12,7 +12,7 @@ Drei Services werden benötigt:
 - Git-Installation
 
 ## Aufbau des Kubernetes-Clusters
-1. Klonen des Projekts von (GitHub)[]
+1. Klonen des Projekts von [GitHub](https://github.com/ynctlm/cas-iot-projekt)
    ```
    git clone https://github.com/ynctlm/cas-iot-projekt.git
    ```
