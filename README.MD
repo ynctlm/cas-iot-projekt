@@ -25,7 +25,7 @@ Drei Services werden benötigt:
    ```
    watch kubectl get all
    ```
-5. Wenn die Pods `grafana`, `mariadb` und `nodered` im Status `Running` sind, können (Node-RED)[localhost:1880] und (Grafana)[localhost:3000] im Browser geöffnet werden.
+5. Wenn die Pods `grafana`, `mariadb` und `nodered` im Status `Running` sind, können [Node-RED](localhost:1880) und [Grafana](localhost:3000) im Browser geöffnet werden.
 6. Die Grafana-Credentials sind:
    
    User: admin
@@ -33,7 +33,7 @@ Drei Services werden benötigt:
    Passwort: admin
 
 ## Initialisieren der Datenbank mit Node-RED Flow
-1. Hierzu (Node-RED)[localhost:1880] ca. 60 aufrufen, nachdem die Kubernetes-Services erfolgreich gestartet wurden. 
+1. Hierzu [Node-RED](localhost:1880) ca. 60 aufrufen, nachdem die Kubernetes-Services erfolgreich gestartet wurden. 
 2. Dann eine beliebige Node in Node-RED verschieben und per `Übernahme (deploy)` bestätigen. 
 3. Im Anschluss wird automatisiert die Datenbank aufgebaut (der Erfolg lässt sich im Debug-Output von Node-RED nachvollziehen).
 4. Im Tab `Demo: Insert test-data` in Node-RED lassen sich Demodaten zur Datenbank hinzufügen, um die Grafana-Dashboards zu testen.
