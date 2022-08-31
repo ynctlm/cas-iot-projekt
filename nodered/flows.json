@@ -60,7 +60,7 @@
         "category": "",
         "in": [
             {
-                "x": 40,
+                "x": 60,
                 "y": 120,
                 "wires": [
                     {
@@ -82,7 +82,7 @@
         "category": "",
         "in": [
             {
-                "x": 60,
+                "x": 80,
                 "y": 60,
                 "wires": [
                     {
@@ -104,11 +104,33 @@
         "category": "",
         "in": [
             {
-                "x": 60,
+                "x": 80,
                 "y": 60,
                 "wires": [
                     {
                         "id": "22953d7cd7fbf754"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ca1be1c4fb6f74b7",
+        "type": "subflow",
+        "name": "/windowstatus",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "2103c24556d1a857"
                     }
                 ]
             }
@@ -334,7 +356,7 @@
         "z": "0f8381518f6a674a",
         "name": "Standort: Wetter am Standort wird per API abgerufen und versendet",
         "info": "",
-        "x": 420,
+        "x": 340,
         "y": 80,
         "wires": []
     },
@@ -349,7 +371,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 210,
+        "x": 230,
         "y": 120,
         "wires": [
             [
@@ -373,7 +395,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 390,
+        "x": 410,
         "y": 120,
         "wires": [
             [
@@ -389,7 +411,7 @@
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 530,
+        "x": 550,
         "y": 120,
         "wires": [
             [
@@ -408,7 +430,7 @@
             }
         ],
         "language": "none",
-        "x": 370,
+        "x": 390,
         "y": 180,
         "wires": [
             [
@@ -427,7 +449,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 190,
+        "x": 210,
         "y": 180,
         "wires": [
             [
@@ -445,7 +467,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 570,
+        "x": 590,
         "y": 180,
         "wires": []
     },
@@ -460,7 +482,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
+        "x": 200,
         "y": 60,
         "wires": [
             [
@@ -474,7 +496,7 @@
         "z": "48c7bb8cccf54c05",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 320,
+        "x": 340,
         "y": 60,
         "wires": [
             [
@@ -504,7 +526,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 110,
+        "x": 130,
         "y": 160,
         "wires": [
             [
@@ -526,7 +548,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 280,
         "y": 140,
         "wires": [
             [
@@ -545,7 +567,7 @@
             }
         ],
         "language": "none",
-        "x": 340,
+        "x": 360,
         "y": 200,
         "wires": [
             [
@@ -564,7 +586,7 @@
             }
         ],
         "language": "none",
-        "x": 320,
+        "x": 340,
         "y": 240,
         "wires": [
             [
@@ -578,7 +600,7 @@
         "z": "48c7bb8cccf54c05",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 400,
+        "x": 420,
         "y": 140,
         "wires": [
             [
@@ -597,7 +619,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 590,
+        "x": 610,
         "y": 220,
         "wires": []
     },
@@ -615,7 +637,7 @@
         "correl": "",
         "expiry": "",
         "broker": "d880f4faf167b53f",
-        "x": 700,
+        "x": 720,
         "y": 140,
         "wires": []
     },
@@ -630,7 +652,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 570,
         "y": 140,
         "wires": [
             [
@@ -649,7 +671,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
+        "x": 200,
         "y": 60,
         "wires": [
             [
@@ -663,7 +685,7 @@
         "z": "398b474e6e30f016",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 320,
+        "x": 340,
         "y": 60,
         "wires": [
             [
@@ -682,7 +704,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 280,
         "y": 140,
         "wires": [
             [
@@ -701,7 +723,7 @@
             }
         ],
         "language": "none",
-        "x": 330,
+        "x": 350,
         "y": 240,
         "wires": [
             [
@@ -715,7 +737,7 @@
         "z": "398b474e6e30f016",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 400,
+        "x": 420,
         "y": 140,
         "wires": [
             [
@@ -746,7 +768,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 110,
+        "x": 130,
         "y": 160,
         "wires": [
             [
@@ -768,7 +790,7 @@
             }
         ],
         "language": "none",
-        "x": 350,
+        "x": 370,
         "y": 200,
         "wires": [
             [
@@ -786,7 +808,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 590,
+        "x": 610,
         "y": 220,
         "wires": []
     },
@@ -804,7 +826,7 @@
         "correl": "",
         "expiry": "",
         "broker": "d880f4faf167b53f",
-        "x": 700,
+        "x": 720,
         "y": 140,
         "wires": []
     },
@@ -819,13 +841,131 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 570,
         "y": 140,
         "wires": [
             [
                 "6152ef541ea71351"
             ]
         ]
+    },
+    {
+        "id": "2103c24556d1a857",
+        "type": "function",
+        "z": "ca1be1c4fb6f74b7",
+        "name": "SELECT",
+        "func": "msg.topic = \"SELECT status FROM servo;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 60,
+        "wires": [
+            [
+                "bc067d590ea3ffa2"
+            ]
+        ]
+    },
+    {
+        "id": "bc067d590ea3ffa2",
+        "type": "mysql",
+        "z": "ca1be1c4fb6f74b7",
+        "mydb": "55bc388994a74c02",
+        "name": "MariaDB",
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "8142b9ccf07d8165"
+            ]
+        ]
+    },
+    {
+        "id": "8142b9ccf07d8165",
+        "type": "switch",
+        "z": "ca1be1c4fb6f74b7",
+        "name": "",
+        "property": "payload[0].status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "e62e14f83ba2f16e"
+            ],
+            [
+                "cceb0d20b9859466"
+            ]
+        ]
+    },
+    {
+        "id": "e62e14f83ba2f16e",
+        "type": "chatbot-message",
+        "z": "ca1be1c4fb6f74b7",
+        "name": "Das Fenster ist geschlossen",
+        "message": [
+            {
+                "message": "Das Fenster ist geschlossen."
+            }
+        ],
+        "language": "none",
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "a182ba4ddabdb9da"
+            ]
+        ]
+    },
+    {
+        "id": "cceb0d20b9859466",
+        "type": "chatbot-message",
+        "z": "ca1be1c4fb6f74b7",
+        "name": "Das Fenster ist geöffnet",
+        "message": [
+            {
+                "message": "Das Fenster ist geöffnet."
+            }
+        ],
+        "language": "none",
+        "x": 330,
+        "y": 180,
+        "wires": [
+            [
+                "a182ba4ddabdb9da"
+            ]
+        ]
+    },
+    {
+        "id": "a182ba4ddabdb9da",
+        "type": "chatbot-telegram-send",
+        "z": "ca1be1c4fb6f74b7",
+        "bot": "aaaaebd82a7f4306",
+        "botProduction": "",
+        "track": false,
+        "passThrough": false,
+        "errorOutput": false,
+        "outputs": 0,
+        "x": 590,
+        "y": 160,
+        "wires": []
     },
     {
         "id": "174dd4ef3448faf4",
@@ -1266,9 +1406,13 @@
             {
                 "type": "command",
                 "command": "/temperature"
+            },
+            {
+                "type": "command",
+                "command": "/windowstatus"
             }
         ],
-        "outputs": 3,
+        "outputs": 4,
         "x": 300,
         "y": 240,
         "wires": [
@@ -1280,6 +1424,9 @@
             ],
             [
                 "f267f9c48fb8d15d"
+            ],
+            [
+                "47aa66154a866209"
             ]
         ]
     },
@@ -1299,7 +1446,7 @@
         "z": "f6f2187d.f17ca8",
         "name": "... /temperature",
         "x": 500,
-        "y": 280,
+        "y": 260,
         "wires": []
     },
     {
@@ -1307,8 +1454,8 @@
         "type": "subflow:0f8381518f6a674a",
         "z": "f6f2187d.f17ca8",
         "name": "Wetter für Standort senden",
-        "x": 380,
-        "y": 340,
+        "x": 340,
+        "y": 360,
         "wires": []
     },
     {
@@ -1317,7 +1464,7 @@
         "z": "f6f2187d.f17ca8",
         "name": "... /openwindow",
         "x": 500,
-        "y": 200,
+        "y": 180,
         "wires": []
     },
     {
@@ -1326,7 +1473,16 @@
         "z": "f6f2187d.f17ca8",
         "name": "... /closewindow",
         "x": 500,
-        "y": 240,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "47aa66154a866209",
+        "type": "subflow:ca1be1c4fb6f74b7",
+        "z": "f6f2187d.f17ca8",
+        "name": ".../windowstatus",
+        "x": 500,
+        "y": 300,
         "wires": []
     }
 ]
