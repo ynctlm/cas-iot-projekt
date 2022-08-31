@@ -436,30 +436,6 @@
             }
         }
     },
-    "node-red-contrib-telegrambot": {
-        "name": "node-red-contrib-telegrambot",
-        "version": "14.0.0",
-        "local": true,
-        "user": true,
-        "nodes": {
-            "telegrambot": {
-                "name": "telegrambot",
-                "types": [
-                    "telegram bot",
-                    "telegram receiver",
-                    "telegram command",
-                    "telegram event",
-                    "telegram sender",
-                    "telegram reply"
-                ],
-                "enabled": true,
-                "local": true,
-                "user": false,
-                "module": "node-red-contrib-telegrambot",
-                "file": "/data/node_modules/node-red-contrib-telegrambot/telegrambot/99-telegrambot.js"
-            }
-        }
-    },
     "node-red-contrib-chatbot": {
         "name": "node-red-contrib-chatbot",
         "version": "1.0.7",
