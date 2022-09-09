@@ -1336,9 +1336,9 @@
         "id": "9571239a9a68d0bf",
         "type": "comment",
         "z": "55cdbbae8fc6c215",
-        "name": "Grund: Telegram-Bot soll auch ohne Datenbank funktionieren",
+        "name": "Grund: Abfrage der Sensordaten soll auch ohne Datenbank funktionieren",
         "info": "",
-        "x": 300,
+        "x": 340,
         "y": 100,
         "wires": []
     },

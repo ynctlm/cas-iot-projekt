@@ -82,7 +82,7 @@
         "category": "",
         "in": [
             {
-                "x": 60,
+                "x": 80,
                 "y": 60,
                 "wires": [
                     {
@@ -104,7 +104,7 @@
         "category": "",
         "in": [
             {
-                "x": 60,
+                "x": 80,
                 "y": 60,
                 "wires": [
                     {
@@ -126,7 +126,7 @@
         "category": "",
         "in": [
             {
-                "x": 60,
+                "x": 80,
                 "y": 60,
                 "wires": [
                     {
@@ -482,7 +482,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
+        "x": 200,
         "y": 60,
         "wires": [
             [
@@ -496,7 +496,7 @@
         "z": "48c7bb8cccf54c05",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 320,
+        "x": 340,
         "y": 60,
         "wires": [
             [
@@ -526,7 +526,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 110,
+        "x": 130,
         "y": 160,
         "wires": [
             [
@@ -548,7 +548,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 280,
         "y": 140,
         "wires": [
             [
@@ -567,7 +567,7 @@
             }
         ],
         "language": "none",
-        "x": 340,
+        "x": 360,
         "y": 200,
         "wires": [
             [
@@ -586,7 +586,7 @@
             }
         ],
         "language": "none",
-        "x": 320,
+        "x": 340,
         "y": 240,
         "wires": [
             [
@@ -600,7 +600,7 @@
         "z": "48c7bb8cccf54c05",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 400,
+        "x": 420,
         "y": 140,
         "wires": [
             [
@@ -619,7 +619,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 590,
+        "x": 610,
         "y": 220,
         "wires": []
     },
@@ -637,7 +637,7 @@
         "correl": "",
         "expiry": "",
         "broker": "d880f4faf167b53f",
-        "x": 700,
+        "x": 720,
         "y": 140,
         "wires": []
     },
@@ -652,7 +652,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 570,
         "y": 140,
         "wires": [
             [
@@ -671,7 +671,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
+        "x": 200,
         "y": 60,
         "wires": [
             [
@@ -685,7 +685,7 @@
         "z": "398b474e6e30f016",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 320,
+        "x": 340,
         "y": 60,
         "wires": [
             [
@@ -704,7 +704,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
+        "x": 280,
         "y": 140,
         "wires": [
             [
@@ -723,7 +723,7 @@
             }
         ],
         "language": "none",
-        "x": 330,
+        "x": 350,
         "y": 240,
         "wires": [
             [
@@ -737,7 +737,7 @@
         "z": "398b474e6e30f016",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 400,
+        "x": 420,
         "y": 140,
         "wires": [
             [
@@ -768,7 +768,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 110,
+        "x": 130,
         "y": 160,
         "wires": [
             [
@@ -790,7 +790,7 @@
             }
         ],
         "language": "none",
-        "x": 350,
+        "x": 370,
         "y": 200,
         "wires": [
             [
@@ -808,7 +808,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 590,
+        "x": 610,
         "y": 220,
         "wires": []
     },
@@ -826,7 +826,7 @@
         "correl": "",
         "expiry": "",
         "broker": "d880f4faf167b53f",
-        "x": 700,
+        "x": 720,
         "y": 140,
         "wires": []
     },
@@ -841,7 +841,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 570,
         "y": 140,
         "wires": [
             [
@@ -860,7 +860,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
+        "x": 200,
         "y": 60,
         "wires": [
             [
@@ -874,7 +874,7 @@
         "z": "ca1be1c4fb6f74b7",
         "mydb": "55bc388994a74c02",
         "name": "MariaDB",
-        "x": 320,
+        "x": 340,
         "y": 60,
         "wires": [
             [
@@ -904,7 +904,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 110,
+        "x": 130,
         "y": 160,
         "wires": [
             [
@@ -926,7 +926,7 @@
             }
         ],
         "language": "none",
-        "x": 320,
+        "x": 340,
         "y": 140,
         "wires": [
             [
@@ -945,7 +945,7 @@
             }
         ],
         "language": "none",
-        "x": 310,
+        "x": 330,
         "y": 180,
         "wires": [
             [
@@ -963,7 +963,7 @@
         "passThrough": false,
         "errorOutput": false,
         "outputs": 0,
-        "x": 570,
+        "x": 590,
         "y": 160,
         "wires": []
     },
@@ -1336,9 +1336,9 @@
         "id": "9571239a9a68d0bf",
         "type": "comment",
         "z": "55cdbbae8fc6c215",
-        "name": "Grund: Telegram-Bot soll auch ohne Datenbank funktionieren",
+        "name": "Grund: Abfrage der Sensordaten soll auch ohne Datenbank funktionieren",
         "info": "",
-        "x": 300,
+        "x": 340,
         "y": 100,
         "wires": []
     },
